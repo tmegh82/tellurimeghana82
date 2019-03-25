@@ -1,0 +1,32 @@
+package com.example.meghana.interaction;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class Main3Activity extends AppCompatActivity {
+    EditText UsernameEt, PasswordEt;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main3);
+        UsernameEt = (EditText) findViewById(R.id.editText);
+        PasswordEt = (EditText) findViewById(R.id.editText4);
+    }
+
+    public void OnLogin(View view) {
+        String username = UsernameEt.getText().toString();
+        String password = PasswordEt.getText().toString();
+        String type = "login";
+        backgroundworker2 backgroundworker2 = new backgroundworker2(this);
+        backgroundworker2.execute(type, username, password);
+    }
+
+}
+
