@@ -76,18 +76,18 @@ int main()
 		struct node *poly2 = NULL;
 			struct node *poly = NULL;
 	
-      createnode(2,0,&poly1);
-      createnode(5,1,&poly2);
-     createnode(5,0,&poly2);
-      show(poly1);
+Â      createnode(2,0,&poly1);
+Â Â Â Â   createnode(5,1,&poly2);
+Â Â Â Â  createnode(5,0,&poly2);
+Â Â Â Â Â Â show(poly1);
 show(poly2);
- struct node *poly = (struct node*)malloc(sizeof(struct node));
-     
-    // Function add two polynomial numbers
-   add(poly1, poly2, poly);
-     
-    // Display resultant List
-    printf("\nAdded polynomial: ");
-    show(poly);
+Â struct node *poly = (struct node*)malloc(sizeof(struct node));
+Â Â Â Â Â 
+Â Â Â Â // Function add two polynomial numbers
+Â Â Â add(poly1, poly2, poly);
+Â Â Â Â Â 
+Â Â Â Â // Display resultant List
+Â Â Â Â printf("\nAdded polynomial: ");
+Â Â Â Â show(poly);
 }
 
