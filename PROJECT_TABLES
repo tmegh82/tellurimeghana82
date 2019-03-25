@@ -1,0 +1,316 @@
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Bharath     | Chandra       | M      |
+| Dondapati   | MohanVamsi    | M      |
+| Gatram      | Manoj         | M      |
+| Gondayala   | Phani         | M      |
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Maheswaran  | Vineetha      | F      |
+| Mamidi      | Snigdha       | F      |
+| Takkelapati | Harika        | F      |
+| Tatavarthy  | Prasanna      | F      |
+| Telluri     | Meghana Reddy | F      |
+| Yadavalli   | Avinash       | M      |
++-------------+---------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from S_PERSONAL2;
++-----------+------------+---------------+------------+------------+-------------+------------------+-----------+
+| RNo       | First_Name | Last_Name     | DOB        | Mobile_No  | Blood_Group | Address          | Password  |
++-----------+------------+---------------+------------+------------+-------------+------------------+-----------+
+| CDS17M001 | Bharath    | Chandra       | 1996-03-02 | 7598426786 | B+          | Warangal,AP      | Bharath   |
+| COE16B041 | Gorantla   | Meghana       | 1999-06-18 | 8332886789 | O+          | Chiral, A.P.     | Maggi833  |
+| COE16B042 | Maheswaran | Vinitha       | 1999-07-24 | 9487117578 | O+          | Adyar,TN         | Vini_123  |
+| COE16B043 | Telluri    | Meghana Reddy | 1999-02-08 | 9618402321 | O+          | Guntur,A.P.      | Dolly123  |
+| EDM16B008 | Gatram     | Manoj         | 1999-08-16 | 8746953241 | B+          | Chilaluripeta,AP | Man@j     |
+| EDM16B038 | Yadavalli  | Avinash       | 1999-01-24 | 8642541357 | A-          | Rajmundry,A.P    | @vinah    |
+| EVD16I010 | Mamidi     | Snigdha       | 1999-04-23 | 7598423651 | B+          | Vizag,A.P.       | sniggy    |
+| EVD16I018 | Gondayala  | Phani         | 1998-02-18 | 7598426541 | A-          | Bhimavaram,AP    | Phan!     |
+| MDM17B016 | Dondapati  | MohanVamsi    | 2000-03-20 | 9547895785 | O+          | Hyderabad,AP     | vamsi2000 |
+| MFD15I033 | Tatavarthy | Prasanna      | 1997-09-23 | 7598426575 | A-          | Vijayawada,AP    | T@t@      |
++-----------+------------+---------------+------------+------------+-------------+------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| CDS17M001 | cds17m001@iiitdm.ac.in | MDES   | CDS    |     2 | CDS01 | Ashoka Boys Hostel   |           415 |
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
+| MDM17B016 | mdm16b016@iiitdm.ac.in | BTech  | MDM    |     2 | MDM01 | Aswatha Boys Hostel  |           512 |
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel   |           100 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from S_HOSTEL;
++----------------------+-------------------+-------------------+----------------+
+| Hostel_Name          | Hostel_WardenName | Hostel_LandlineNo | Warden_PhoneNo |
++----------------------+-------------------+-------------------+----------------+
+| Ashoka Boys Hostel   | Noor Mohammad     | 0442346572        | 7812345689     |
+| Aswatha Boys Hostel  | Noor Mohammad     | 0442345672        | 7812345689     |
+| Aswatha Girls Hostel | Binsu             | 442567819         | 7654321983     |
++----------------------+-------------------+-------------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| CDS17M001 |     1 | 8.82 |
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
+| EDM16B008 |     1 | 8.82 |
+| EDM16B008 |     2 | 8.85 |
+| EDM16B008 |     3 | 7.85 |
+| EDM16B035 |     1 | 8.34 |
+| EDM16B035 |     2 | 8.68 |
+| EDM16B035 |     3 | 8.48 |
+| EDM16B038 |     1 | 8.23 |
+| EDM16B038 |     2 | 7.90 |
+| EDM16B038 |     3 | 8.85 |
+| EVD16I010 |     1 | 8.49 |
+| EVD16I010 |     2 | 8.64 |
+| EVD16I010 |     3 | 8.85 |
+| EVD16I018 |     1 | 8.78 |
+| EVD16I018 |     2 | 7.90 |
+| EVD16I018 |     3 | 9.50 |
+| MDM17B016 |     1 | 9.60 |
+| MFD15I033 |     1 | 8.20 |
+| MFD15I033 |     2 | 8.47 |
+| MFD15I033 |     3 | 9.07 |
+| MFD15I033 |     4 | 8.54 |
+| MFD15I033 |     5 | 8.84 |
++-----------+-------+------+
+31 rows in set (0.00 sec)
+
+mysql> select * from S_GRADE;
++-----------+-----------+-------+-------+
+| RNo       | Course_No | SemNo | Grade |
++-----------+-----------+-------+-------+
+| CDS17M001 | DES323T   |     1 | A     |
+| CDS17M001 | MAT333T   |     1 | S     |
+| COE16B041 | COM105P   |     1 | S     |
+| COE16B041 | COM105T   |     1 | S     |
+| COE16B041 | COM206T   |     3 | S     |
+| COE16B041 | ELE103T   |     2 | S     |
+| COE16B041 | MAT204T   |     3 | B     |
+| COE16B041 | PHY107P   |     2 | A     |
+| COE16B042 | COM205T   |     3 | A     |
+| COE16B042 | DES104P   |     2 | B     |
+| COE16B042 | DES201T   |     3 | S     |
+| COE16B042 | ELE103T   |     2 | A     |
+| COE16B042 | MAT104T   |     1 | B     |
+| COE16B043 | COM105T   |     1 | A     |
+| COE16B043 | COM206P   |     3 | S     |
+| COE16B043 | COM209P   |     3 | A     |
+| COE16B043 | DES102T   |     2 | A     |
+| COE16B043 | ELE103T   |     2 | S     |
+| COE16B043 | INT110P   |     1 | A     |
+| COE16B043 | PHY108T   |     1 | S     |
+| EDM16B008 | ELE223P   |     2 | A     |
+| EDM16B008 | ELE223T   |     3 | S     |
+| EDM16B008 | INT108T   |     1 | A     |
+| EDM16B008 | INT109P   |     1 | S     |
+| EDM16B008 | INT111P   |     2 | A     |
+| EDM16B008 | MAN102T   |     2 | S     |
+| EDM16B035 | DES105P   |     2 | S     |
+| EDM16B035 | ELE217T   |     3 | S     |
+| EDM16B035 | ELE218T   |     3 | A     |
+| EDM16B035 | INT107T   |     1 | A     |
+| EDM16B035 | MAT105P   |     2 | A     |
+| EDM16B035 | PHY107T   |     1 | S     |
+| EDM16B038 | DES103T   |     1 | A     |
+| EDM16B038 | DES210T   |     3 | A     |
+| EDM16B038 | INT111P   |     2 | A     |
+| EDM16B038 | MAT104T   |     1 | B     |
+| EDM16B038 | MAT204T   |     3 | S     |
+| EDM16B038 | PHY107T   |     2 | B     |
+| EVD16I010 | COM105T   |     1 | A     |
+| EVD16I010 | DES102T   |     2 | S     |
+| EVD16I010 | DES103T   |     1 | S     |
+| EVD16I010 | MAN201T   |     3 | C     |
+| EVD16I010 | MAT105T   |     2 | C     |
+| EVD16I010 | MAT204T   |     3 | A     |
+| EVD16I018 | COM105T   |     1 | S     |
+| EVD16I018 | ELE223P   |     3 | S     |
+| EVD16I018 | INT108T   |     1 | B     |
+| EVD16I018 | MAT204T   |     3 | S     |
+| EVD16I018 | PHY107P   |     2 | S     |
+| EVD16I018 | PHY107T   |     2 | A     |
+| MDM17B016 | DES111P   |     2 | B     |
+| MDM17B016 | DES121P   |     3 | S     |
+| MDM17B016 | MEC102T   |     1 | S     |
+| MDM17B016 | MEC121    |     3 | S     |
+| MDM17B016 | MEC2233P  |     2 | S     |
+| MDM17B016 | PHY107T   |     1 | A     |
+| MFD15I033 | COM105T   |     2 | S     |
+| MFD15I033 | COM444P   |     5 | B     |
+| MFD15I033 | DES103T   |     1 | S     |
+| MFD15I033 | DES120P   |     3 | S     |
+| MFD15I033 | DES229P   |     3 | A     |
+| MFD15I033 | ELE103T   |     1 | S     |
+| MFD15I033 | ELT102P   |     4 | A     |
+| MFD15I033 | ELT102T   |     4 | S     |
+| MFD15I033 | MAN102T   |     2 | C     |
+| MFD15I033 | MAT444P   |     5 | A     |
+| MFD15I033 | MEC103T   |     3 | B     |
++-----------+-----------+-------+-------+
+67 rows in set (0.00 sec)
+
+mysql> select * from S_CGPA;
++-----------+------+
+| RNo       | Cgpa |
++-----------+------+
+| CDS17M001 | 8.82 |
+| COE16B041 | 9.02 |
+| COE16B042 | 8.98 |
+| COE16B043 | 8.85 |
+| EDM16B008 | 8.82 |
+| EDM16B035 | 8.85 |
+| EDM16B038 | 8.01 |
+| EVD16I010 | 8.89 |
+| EVD16I018 | 8.90 |
+| MDM17B016 | 9.60 |
+| MFD15I033 | 8.90 |
++-----------+------+
+11 rows in set (0.00 sec)
+
+mysql> select * from S_ATTENDANCE;
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| CDS17M001 |     1 | Good        |
+| CDS17M001 |     2 | Good        |
+| CDS17M001 |     3 | Good        |
+| CDS17M001 |     4 | Good        |
+| COE16B041 |     1 | Good        |
+| COE16B041 |     2 | Average     |
+| COE16B041 |     3 | Poor        |
+| COE16B041 |     4 | Good        |
+| COE16B042 |     1 | Good        |
+| COE16B042 |     2 | Average     |
+| COE16B042 |     3 | Average     |
+| COE16B042 |     4 | Good        |
+| COE16B043 |     1 | Good        |
+| COE16B043 |     2 | Average     |
+| COE16B043 |     3 | Good        |
+| COE16B043 |     4 | Good        |
+| EDM16B008 |     1 | Good        |
+| EDM16B008 |     2 | Good        |
+| EDM16B008 |     3 | Good        |
+| EDM16B008 |     4 | Good        |
+| EDM16B035 |     1 | Good        |
+| EDM16B035 |     2 | Average     |
+| EDM16B035 |     3 | Good        |
+| EDM16B035 |     4 | Good        |
+| EDM16B038 |     1 | Good        |
+| EDM16B038 |     2 | Poor        |
+| EDM16B038 |     3 | Good        |
+| EDM16B038 |     4 | Good        |
+| EVD16I010 |     1 | Good        |
+| EVD16I010 |     2 | Average     |
+| EVD16I010 |     3 | Poor        |
+| EVD16I010 |     4 | Poor        |
+| EVD16I018 |     1 | Poor        |
+| EVD16I018 |     2 | Good        |
+| EVD16I018 |     3 | Average     |
+| EVD16I018 |     4 | Poor        |
+| MDM17B016 |     1 | Good        |
+| MDM17B016 |     2 | Good        |
+| MDM17B016 |     3 | Good        |
+| MDM17B016 |     4 | Good        |
+| MFD15I033 |     1 | Good        |
+| MFD15I033 |     2 | Poor        |
+| MFD15I033 |     3 | Poor        |
+| MFD15I033 |     4 | Poor        |
++-----------+-------+-------------+
+44 rows in set (0.00 sec)
+
+mysql> select * from S_PARENT;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.S_PARENT' doesn't exist
+mysql> select * from PARENT;
++-----------+-------------+---------------------+--------------+---------------+-------------------------+-------------+-------------+-----------+-----------------+------------+------------+
+| RNo       | F_Fname     | F_Lname             | M_Fname      | M_Lname       | P_EmailId               | P_MobileNo1 | P_MobileNo2 | G_Fname   | G_Lname         | G_MobileNo | P_Password |
++-----------+-------------+---------------------+--------------+---------------+-------------------------+-------------+-------------+-----------+-----------------+------------+------------+
+| CDS17M001 | Bharath     | Ravi                | Bharath      | Sri Malli     | bharath@gmail.com       | 7598453289  | 9874562548  | Kona      | Harshita        | 7598425668 | @!123      |
+| COE16B041 | GORANTLA    | SREE KRISHNA PRASAD | GORANTLA     | ANITA         | gskprasad@gmail.com     | 9440471610  | 9293600614  | GORANTLA  | JASWANTH RAYUDU | 8985848899 | Maggi$833  |
+| COE16B042 | Subramanian | Maheswaran          | Subramanian  | Divya         | sm@gmail.com            | 8649757592  | 756984254   | Null      | Null            | Null       | subbu      |
+| COE16B043 | Telluri     | Gangadhara Reddy    | Kanchumarthy | Sri Devi      | gtelluri@gmail.com      | 9849399738  | 9848458317  | NUll      | Null            | Null       | g@nga      |
+| EDM16B008 | Gatram      | Mallikarjuna        | Gatram       | Radha         | mallikarjuna@gmail.com  | 8574369875  | 7598534685  | Pratipati | Ravi Sekhar     | 8549631245 | g@tram!    |
+| EDM16B035 | Takkelapati | Srinivasan          | Takkelapati  | Madhavi Latha | tsr10@gmail.com         | 8964257816  | 9657425367  | Null      | Null            | Null       | tsr10      |
+| EDM16B038 | Yadavalli   | Babu                | Yadavalli    | Sudha         | yadavallibabu@gmail.com | 8642513497  | 7598423648  | Charles   | Gowrav          | 8469521349 | b@bu       |
+| EVD16I010 | Mamidi      | Venkatarao          | Mamidi       | Sowjanya      | mvenkatarao@gmail.com   | 759842654   | 8964512357  | Talluri   | Venkatesh       | 7598426586 | venky      |
+| EVD16I018 | Gondayala   | JayRam              | Gondayala    | Gayathri      | gondayala@gmail.com     | 7123456895  | 9456871235  | Gali      | Tanmai          | 7598426541 | Gond@      |
+| MDM17B016 | Dondapati   | Shasank             | Dondapati    | Neha          | dondapatis@gmail.com    | 9845684217  | 7598123654  | Kurra     | Harshita        | 9847895897 | dond@      |
+| MFD15I033 | Tatavarthy  | Srinivasrao         | Tatavarthy   | Lalitha       | tata@gmail.com          | 7598426576  | 8698425613  | Sharma    | Vineesh         | 8456987455 | &%$        |
++-----------+-------------+---------------------+--------------+---------------+-------------------------+-------------+-------------+-----------+-----------------+------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from F_ADVISOR1;
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| FA_Id | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo | FA_Password |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| CDS01 | Sadagopan         | Narasimhan  | sady@iiitdm.ac.in        | 9874563214  | s@DDY       |
+| COM01 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| EDM01 | K                 | Selva Jyoti | kselvajyoti@gmail.com    | 8671549672  | ksj@789     |
+| MDM01 | Srinivan          | Pandian     | srpandian@gmail.com      | 8125463254  | srpan##     |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from F_ADVISOR2;
++-------+-----------+-----------+----------+
+| FA_Id | FA_Degree | FA_Branch | FA_Batch |
++-------+-----------+-----------+----------+
+| CDS01 | MDES      | CDS       |     2017 |
+| COM01 | BTech     | COE       |     2016 |
+| COM01 | DD        | MFD       |     2015 |
+| EDM01 | BTech     | EDM       |     2016 |
+| MDM01 | BTech     | MDM       |     2017 |
++-------+-----------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from ADMIN;
++--------+------------+-------------------+
+| A_Id   | A_Password | A_EmailId         |
++--------+------------+-------------------+
+| dinesh | dinesh123  | dinesh1@gmail.com |
++--------+------------+-------------------+
+1 row in set (0.00 sec)
+
+

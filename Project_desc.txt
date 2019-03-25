@@ -1,0 +1,148 @@
+mysql> desc ADMIN;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| A_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| A_Password | varchar(15) | NO   |     | NULL    |       |
+| A_EmailId  | varchar(22) | NO   | UNI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR2;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FA_Id     | varchar(10) | NO   | MUL | NULL    |       |
+| FA_Degree | varchar(11) | NO   | PRI | NULL    |       |
+| FA_Branch | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Batch  | int(11)     | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.01 sec)
+
+mysql> desc S_ATTENDANCE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| Month       | int(11)     | NO   | PRI | NULL    |       |
+| Performance | varchar(10) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_GPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| SemNo | int(11)      | NO   | PRI | NULL    |       |
+| GPA   | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc COLLEGE;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.COLLEGE' doesn't exist
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_HOSTEL;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Hostel_Name       | varchar(20) | NO   | PRI | NULL    |       |
+| Hostel_WardenName | varchar(20) | NO   |     | NULL    |       |
+| Hostel_LandlineNo | varchar(10) | YES  |     | NULL    |       |
+| Warden_PhoneNo    | char(10)    | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_PERONAL1;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.S_PERONAL1' doesn't exist
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+

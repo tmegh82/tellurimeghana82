@@ -1,0 +1,263 @@
+1............................................................................................................................................
+mysql> SELECT IF((STRCMP('MEGHANA',(select Password from S_PERSONAL2 where RNo='COE16B041'))=0),"YES","NO");
++-----------------------------------------------------------------------------------------------+
+| IF((STRCMP('MEGHANA',(select Password from S_PERSONAL2 where RNo='COE16B041'))=0),"YES","NO") |
++-----------------------------------------------------------------------------------------------+
+| NO                                                                                            |
++-----------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT IF((STRCMP('Maggi833',(select Password from S_PERSONAL2 where RNo='COE16B041'))=0),"YES","NO");
++------------------------------------------------------------------------------------------------+
+| IF((STRCMP('Maggi833',(select Password from S_PERSONAL2 where RNo='COE16B041'))=0),"YES","NO") |
++------------------------------------------------------------------------------------------------+
+| YES                                                                                            |
++------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+2............................................................................................................................................
+mysql> select * from S_PERSONAL1 NATURAL JOIN S_PERSONAL2 where RNo='COE16B041';
++------------+-----------+--------+-----------+------------+------------+-------------+--------------+----------+
+| First_Name | Last_Name | Gender | RNo       | DOB        | Mobile_No  | Blood_Group | Address      | Password |
++------------+-----------+--------+-----------+------------+------------+-------------+--------------+----------+
+| Gorantla   | Meghana   | F      | COE16B041 | 1999-06-18 | 8332886789 | O+          | Chiral, A.P. | Maggi833 |
++------------+-----------+--------+-----------+------------+------------+-------------+--------------+----------+
+1 row in set (0.00 sec)
+
+3............................................................................................................................................
+mysql> select * from S_COLLEGE where RNo='COE16B041';
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+1 row in set (0.00 sec)
+
+
+4............................................................................................................................................
+mysql> select * from S_HOSTEL;
++----------------------+-------------------+-------------------+----------------+
+| Hostel_Name          | Hostel_WardenName | Hostel_LandlineNo | Warden_PhoneNo |
++----------------------+-------------------+-------------------+----------------+
+| Ashoka Boys Hostel   | Noor Mohammad     | 0442346572        | 7812345689     |
+| Aswatha Boys Hostel  | Noor Mohammad     | 0442345672        | 7812345689     |
+| Aswatha Girls Hostel | Binsu             | 442567819         | 7654321983     |
++----------------------+-------------------+-------------------+----------------+
+3 rows in set (0.00 sec)
+
+5............................................................................................................................................
+mysql> select * from S_GRADE NATURAL JOIN S_GPA NATURAL JOIN S_CGPA where RNo='COE16B041';
++-----------+-------+-----------+-------+------+------+
+| RNo       | SemNo | Course_No | Grade | GPA  | Cgpa |
++-----------+-------+-----------+-------+------+------+
+| COE16B041 |     1 | COM105P   | S     | 8.83 | 9.02 |
+| COE16B041 |     1 | COM105T   | S     | 8.83 | 9.02 |
+| COE16B041 |     2 | ELE103T   | S     | 9.23 | 9.02 |
+| COE16B041 |     2 | PHY107P   | A     | 9.23 | 9.02 |
+| COE16B041 |     3 | COM206T   | S     | 9.09 | 9.02 |
+| COE16B041 |     3 | MAT204T   | B     | 9.09 | 9.02 |
++-----------+-------+-----------+-------+------+------+
+6 rows in set (0.00 sec)
+
+6............................................................................................................................................
+mysql> select * from S_ATTENDANCE where RNo='COE16B041';
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| COE16B041 |     1 | Good        |
+| COE16B041 |     2 | Average     |
+| COE16B041 |     3 | Poor        |
+| COE16B041 |     4 | Good        |
++-----------+-------+-------------+
+4 rows in set (0.00 sec)
+
+
+7............................................................................................................................................
+mysql> SELECT RNo,Hostel_Name,Hostel_WardenName from S_COLLEGE NATURAL JOIN S_HOSTEL WHERE RNo='COE16B042';
++-----------+----------------------+-------------------+
+| RNo       | Hostel_Name          | Hostel_WardenName |
++-----------+----------------------+-------------------+
+| COE16B042 | Aswatha Girls Hostel | Binsu             |
++-----------+----------------------+-------------------+
+1 row in set (0.00 sec)
+
+8............................................................................................................................................
+
+mysql> select RNo,Month,Performance from S_COLLEGE  NATURAL JOIN F_ADVISOR1 NATURAL JOIN S_ATTENDANCE where FA_Id = 'COM01' AND Performance='Good' and Month = 1;
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| COE16B041 |     1 | Good        |
+| COE16B042 |     1 | Good        |
+| COE16B043 |     1 | Good        |
+| MFD15I033 |     1 | Good        |
++-----------+-------+-------------+
+4 rows in set (0.00 sec)
+
+9...........................................................................................................................................
+mysql> select * from F_ADVISOR2 F1 where F1.FA_Id in (select F2.FA_Id from F_ADVISOR2 F2 group by FA_Id having count(*)>=2);
++-------+-----------+-----------+----------+
+| FA_Id | FA_Degree | FA_Branch | FA_Batch |
++-------+-----------+-----------+----------+
+| COM01 | BTech     | COE       |     2016 |
+| COM01 | DD        | MFD       |     2015 |
++-------+-----------+-----------+----------+
+2 rows in set (0.01 sec)
+
+10..........................................................................................................................................
+mysql> select * from F_ADVISOR1 NATURAL JOIN F_ADVISOR2 WHERE FA_Batch = 2017;
++-------+-----------+------------+---------------------+-------------+-------------+-----------+-----------+----------+
+| FA_Id | FA_Fname  | FA_Lname   | FA_EmailId          | FA_MobileNo | FA_Password | FA_Degree | FA_Branch | FA_Batch |
++-------+-----------+------------+---------------------+-------------+-------------+-----------+-----------+----------+
+| CDS01 | Sadagopan | Narasimhan | sady@iiitdm.ac.in   | 9874563214  | s@DDY       | MDES      | CDS       |     2017 |
+| MDM01 | Srinivan  | Pandian    | srpandian@gmail.com | 8125463254  | srpan##     | BTech     | MDM       |     2017 |
++-------+-----------+------------+---------------------+-------------+-------------+-----------+-----------+----------+
+2 rows in set (0.00 sec)
+
+11................................................................................................................................................
+mysql> select * from S_COLLEGE  NATURAL JOIN F_ADVISOR1 where FA_Id = 'COM01';
++-------+-----------+------------------------+--------+--------+-------+----------------------+---------------+-------------------+-------------+--------------------------+-------------+-------------+
+| FA_Id | RNo       | EmailId                | Degree | Branch | SemNo | Hostel_Name          | Hostel_RoomNo | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo | FA_Password |
++-------+-----------+------------------------+--------+--------+-------+----------------------+---------------+-------------------+-------------+--------------------------+-------------+-------------+
+| COM01 | COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | Aswatha Girls Hostel |           910 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| COM01 | COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | Aswatha Girls Hostel |           906 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| COM01 | COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | Aswatha Girls Hostel |           905 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| COM01 | MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | Ashoka Boys Hostel   |           100 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
++-------+-----------+------------------------+--------+--------+-------+----------------------+---------------+-------------------+-------------+--------------------------+-------------+-------------+
+4 rows in set (0.00 sec)
+
+12................................................................................................................................................
+mysql> select * from S_COLLEGE S NATURAL JOIN PARENT P where P.RNo = 'MFD15I033';
++-----------+------------------------+--------+--------+-------+-------+--------------------+---------------+------------+-------------+------------+---------+----------------+-------------+-------------+---------+---------+------------+------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name        | Hostel_RoomNo | F_Fname    | F_Lname     | M_Fname    | M_Lname | P_EmailId      | P_MobileNo1 | P_MobileNo2 | G_Fname | G_Lname | G_MobileNo | P_Password |
++-----------+------------------------+--------+--------+-------+-------+--------------------+---------------+------------+-------------+------------+---------+----------------+-------------+-------------+---------+---------+------------+------------+
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel |           100 | Tatavarthy | Srinivasrao | Tatavarthy | Lalitha | tata@gmail.com | 7598426576  | 8698425613  | Sharma  | Vineesh | 8456987455 | &%$        |
++-----------+------------------------+--------+--------+-------+-------+--------------------+---------------+------------+-------------+------------+---------+----------------+-------------+-------------+---------+---------+------------+------------+
+1 row in set (0.00 sec)
+
+13.....................................................................................................................................
+mysql> select FA_Id,FA_Fname,FA_Lname,FA_EmailId,FA_MobileNo from S_COLLEGE S NATURAL JOIN PARENT P NATURAL JOIN F_ADVISOR1 where P.RNo = 'MFD15I033';
++-------+-------------------+-------------+--------------------------+-------------+
+| FA_Id | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo |
++-------+-------------------+-------------+--------------------------+-------------+
+| COM01 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  |
++-------+-------------------+-------------+--------------------------+-------------+
+1 row in set (0.00 sec)
+
+14...........................................................................................................................................
+mysql> select FA_Id,FA_Fname,FA_Lname,FA_EmailId,FA_MobileNo from S_COLLEGE S NATURAL JOIN PARENT P NATURAL JOIN F_ADVISOR1 where P.RNo = 'MFD15I033';
++-------+-------------------+-------------+--------------------------+-------------+
+| FA_Id | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo |
++-------+-------------------+-------------+--------------------------+-------------+
+| COM01 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  |
++-------+-------------------+-------------+--------------------------+-------------+
+1 row in set (0.00 sec)
+
+15.........................................................................................................................................................
+mysql> SELECT RNo,SemNo,GPA from S_GPA natural join PARENT where RNo='COE16B042';
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
++-----------+-------+------+
+3 rows in set (0.00 sec)
+
+16...........................................................................................................................................
+mysql> select RNo,Hostel_RoomNo,Hostel_WardenName,Hostel_Name,Hostel_LandlineNo,Warden_PhoneNo from S_COLLEGE NATURAL JOIN PARENT P NATURAL JOIN S_HOSTEL where P.RNo = 'COE16B043';
++-----------+---------------+-------------------+----------------------+-------------------+----------------+
+| RNo       | Hostel_RoomNo | Hostel_WardenName | Hostel_Name          | Hostel_LandlineNo | Warden_PhoneNo |
++-----------+---------------+-------------------+----------------------+-------------------+----------------+
+| COE16B043 |           905 | Binsu             | Aswatha Girls Hostel | 442567819         | 7654321983     |
++-----------+---------------+-------------------+----------------------+-------------------+----------------+
+1 row in set (0.00 sec)
+
+17.............................................................................................................................................
+mysql> select RNo,Month,Performance from S_ATTENDANCE NATURAL JOIN PARENT P where P.RNo = 'COE16B042';
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| COE16B042 |     1 | Good        |
+| COE16B042 |     2 | Average     |
+| COE16B042 |     3 | Average     |
+| COE16B042 |     4 | Good        |
++-----------+-------+-------------+
+4 rows in set (0.00 sec)
+
+18.............................................................................................................................................
+mysql> select RNo,F_Fname,F_Lname,M_Fname,M_Lname,P_EmailId,P_MobileNo1,P_MobileNo2 from PARENT NATURAL JOIN S_COLLEGE NATURAL JOIN F_ADVISOR1 where FA_Id = 'COM01';
++-----------+-------------+---------------------+--------------+----------+---------------------+-------------+-------------+
+| RNo       | F_Fname     | F_Lname             | M_Fname      | M_Lname  | P_EmailId           | P_MobileNo1 | P_MobileNo2 |
++-----------+-------------+---------------------+--------------+----------+---------------------+-------------+-------------+
+| COE16B041 | GORANTLA    | SREE KRISHNA PRASAD | GORANTLA     | ANITA    | gskprasad@gmail.com | 9440471610  | 9293600614  |
+| COE16B042 | Subramanian | Maheswaran          | Subramanian  | Divya    | sm@gmail.com        | 8649757592  | 756984254   |
+| COE16B043 | Telluri     | Gangadhara Reddy    | Kanchumarthy | Sri Devi | gtelluri@gmail.com  | 9849399738  | 9848458317  |
+| MFD15I033 | Tatavarthy  | Srinivasrao         | Tatavarthy   | Lalitha  | tata@gmail.com      | 7598426576  | 8698425613  |
++-----------+-------------+---------------------+--------------+----------+---------------------+-------------+-------------+
+4 rows in set (0.00 sec)
+
+19...........................................................................................................................................
+mysql> select RNo,F_Fname,F_Lname,M_Fname,M_Lname,P_EmailId,P_MobileNo1,P_MobileNo2 from PARENT NATURAL JOIN S_COLLEGE NATURAL JOIN F_ADVISOR1  NATURAL JOIN S_ATTENDANCE where FA_Id = 'COM01' and Performance = 'Poor' and Month = 2;
++-----------+------------+-------------+------------+---------+----------------+-------------+-------------+
+| RNo       | F_Fname    | F_Lname     | M_Fname    | M_Lname | P_EmailId      | P_MobileNo1 | P_MobileNo2 |
++-----------+------------+-------------+------------+---------+----------------+-------------+-------------+
+| MFD15I033 | Tatavarthy | Srinivasrao | Tatavarthy | Lalitha | tata@gmail.com | 7598426576  | 8698425613  |
++-----------+------------+-------------+------------+---------+----------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+20...........................................................................................................................................
+mysql> SELECT IF((STRCMP('MEGHANA',(select Password from S_PERSONAL2 where RNo='COE16B041'))=0),"1.Personal Profile 2.College Profile 3.Grades 4.Attendance 5.Faculty Advior","Sorry! Wrong Credentials...") as Login;
++-----------------------------+
+| Login                       |
++-----------------------------+
+| Sorry! Wrong Credentials... |
++-----------------------------+
+1 row in set (0.00 sec)
+
+21...........................................................................................................................................
+mysql> SELECT IF((STRCMP('Maggi833',(select Password from S_PERSONAL2 where RNo='COE16B041'))=0),"1.Personal Profile 2.College Profile 3.Grades 4.Attendance 5.Faculty Advior","Sorry! Wrong Credentials...") as Login;
++-----------------------------------------------------------------------------+
+| Login                                                                       |
++-----------------------------------------------------------------------------+
+| 1.Personal Profile 2.College Profile 3.Grades 4.Attendance 5.Faculty Advior |
++-----------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+22...........................................................................................................................................
+mysql> SELECT IF((STRCMP('s@DDY',(select FA_Password from F_ADVISOR1 where FA_Id='COM02'))=0),"1.Personal Profile 2.Student Details 3.Grades 4.Attendance 5.Parent Details","Sorry! Wrong Credentials...") as Login;
++-----------------------------+
+| Login                       |
++-----------------------------+
+| Sorry! Wrong Credentials... |
++-----------------------------+
+1 row in set (0.00 sec)
+
+23............................................................................................................................................
+mysql> SELECT IF((STRCMP('s@DDY',(select FA_Password from F_ADVISOR1 where FA_Id='CDS01'))=0),"1.Personal Profile 2.Student Details 3.Grades 4.Attendance 5.Parent Details","Sorry! Wrong Credentials...") as Login;
++-----------------------------------------------------------------------------+
+| Login                                                                       |
++-----------------------------------------------------------------------------+
+| 1.Personal Profile 2.Student Details 3.Grades 4.Attendance 5.Parent Details |
++-----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+24............................................................................................................................................
+mysql>  SELECT IF((STRCMP('@!123',(select P_Password from PARENT where RNo='CDS17M001'))=0),"1.Personal Profile 2.Student Details 3.Faculty_Advisor Details of the student","Sorry! Wrong Credentials...") as Login;
++-------------------------------------------------------------------------------+
+| Login                                                                         |
++-------------------------------------------------------------------------------+
+| 1.Personal Profile 2.Student Details 3.Faculty_Advisor Details of the student |
++-------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+25.....................................................................................................................................................
+mysql> SELECT IF((STRCMP('!123',(select P_Password from PARENT where RNo='CDS17M001'))=0),"1.Personal Profile 2.Student Details 3.Faculty_Advisor Details of the student","Sorry! Wrong Credentials...") as Login;
++-----------------------------+
+| Login                       |
++-----------------------------+
+| Sorry! Wrong Credentials... |
++-----------------------------+
+1 row in set (0.00 sec)
+
+
