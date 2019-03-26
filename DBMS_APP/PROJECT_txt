@@ -1,0 +1,4190 @@
+mysql> create table S_PERSONAL2
+    -> ( RNo CHAR(9) NOT NULL, 
+    ->   First_Name VARCHAR(15) NOT NULL,
+    ->   Last_Name VARCHAR(15) NOT NULL,
+    ->   DOB date,
+    ->   Mobile_No INT NOT NULL, 
+    ->   Blood_Group VARCHAR(3),
+    ->   Address VARCHAR(30) NOT NULL,
+    ->   Password VARCHAR(15) NOT NULL,
+    ->   PRIMARY KEY(RNo),
+    ->   UNIQUE(Mobile_No));
+Query OK, 0 rows affected (1.08 sec)
+
+mysql> create table S_COLLEGE
+    -> ( RNo CHAR(9) NOT NULL,
+    ->   EmailId CHAR(22) NOT NULL, 
+    ->   Degree VARCHAR(11) NOT NULL,
+    ->   Branch VARCHAR(10) NOT NULL,
+    ->   SemNo INT,
+    ->   FId VARCHAR(10) NOT NULL,
+    ->   Hostel_Name VARCHAR(20),
+    ->   Hostel_RoomNo INT,
+    ->   PRIMARY KEY(RNo),
+    ->   UNIQUE(EmailId));
+Query OK, 0 rows affected (0.47 sec)
+
+mysql> create table S_Hostel
+    -> ( Hostel_Name VARCHAR(20),
+    ->   Hostel_WardenName VARCHAR(20) NOT NULL,
+    ->   Hostel_LandlineNo INT,
+    ->   Warden_PhoneNo INT NOT NULL,
+    ->   PRIMARY KEY(Hostel_Name));
+Query OK, 0 rows affected (0.64 sec)
+
+mysql> create table S_HOSTEL LIKE S_Hostel;
+Query OK, 0 rows affected (0.45 sec)
+
+mysql> delete table S_Hostel;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table S_Hostel' at line 1
+mysql> drop table S_Hostel;
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> create table S_GRADE
+    -> ( RollNo CHAR(9) NOT NULL,
+    ->   Course_No VARCHAR(20) NOT NULL,
+    ->   SemNo INT,
+    ->   Grade CHAR,
+    ->   PRIMARY KEY(RollNo, Course_No));
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> create table S_CGPA
+    -> (RollNo INT,
+    ->  Cgpa DEC(3,2),
+    -> ^C
+mysql> create table S_CGPA
+    -> ( RNo INT,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create table S_CGPA
+    -> ( RNo CHAR(9) NOT NULL,
+    ->   Cgpa DEC(3,2),
+    ->   PRIMARY KEY(RNo) );
+Query OK, 0 rows affected (0.40 sec)
+
+mysql> alter table S_GRADE change RollNo RNo CHAR(9);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table S_GPA
+    -> (RNo CHAR(9) NOT NULL,
+    -> SemNo INT NOT NULL,
+    -> GPA DEC(3,2),
+    -> PRIMARY KEY(RNo,SemNo));
+Query OK, 0 rows affected (0.45 sec)
+
+mysql> create table S_Performance
+    -> (RNo CHAR(9) NOT NULL,
+    -> Month INT,
+    -> PER;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> create table S_Attendance
+    -> (RNo CHAR(9) NOT NULL,
+    -> Month INT,
+    -> Percentage INT,
+    -> PRIMARY KEY(RNo,Month));
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> create table ADMIN
+    -> (A_Id VARCHAR(10) NOT NULL,
+    -> A_Password VARCHAR(15) NOT NULL,
+    -> A_EmailId VARCHAR(22) NOT NULL,
+    -> PRIMARY KEY(A_Id),
+    -> UNIQUE(A_EmailId));
+Query OK, 0 rows affected (1.03 sec)
+
+mysql> create table S_ATTENDANCE LIKE S_Attendance;
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> drop S_Attendance;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S_Attendance' at line 1
+mysql> drop table S_Attendance;
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> create table PARENT
+    -> ( RNo CHAR(9) NOT NULL,
+    ->   F_Fname VARCHAR(20),
+    ->   F_Lname VARCHAR(20),
+    ->   M_Fname VARCHAR(20),
+    ->   M_Lname VARCHAR(20),
+    ->   P_EmailId VARCHAR(40),
+    ->   P_MobileNo1 INT,
+    ->   P_MobileNo2 INT,
+    ->   G_Fname VARCHAR(20),
+    ->   G_Lname VARCHAR(20),
+    ->   G_MobileNo INT,
+    ->   P_Password VARCHAR(15) not null,
+    ->   PRIMARY KEY(RNo));
+Query OK, 0 rows affected (0.72 sec)
+
+mysql> create table F_ADVISOR1
+    -> ( F_Id VARCHAR(10) NOT NULL,
+    ->   F_FName VARCHAR(20),
+    ->   F_LName VARCHAR(20),
+    ->   ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> create table F_ADVISOR1 ( FA_Id VARCHAR(10) NOT NULL,   FA_Fname VARCHAR(20),   FA_Lname VARCHAR(20), FA_EmailId VARCHAR(30) NOT NULL, FA_MobileNo INT, FA_Password VARCHAR(15) NOT NULL, PRIMARY KEY(FA_Id), UNIQUE(FA_EmailId));
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> create table F_ADVISOR2
+    -> ( FA_Id VARCHAR(10) NOT NULL,
+    ->   FA_Degree VARCHAR(11) NOT NULL,
+    ->   FA_Branch VARCHAR(10) NOT NULL,
+    ->   FA_Batch INT NOT NULL,
+    ->   PRIMARY KEY(FA_Degree, FA_Branch, FA_Batch));
+Query OK, 0 rows affected (1.31 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_ATTENDANCE
+    -> ;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| RNo        | char(9) | NO   | PRI | NULL    |       |
+| Month      | int(11) | NO   | PRI | NULL    |       |
+| Percentage | int(11) | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month CHECK(Month>=1 and Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CHECK(Month>=1 and Month <=12)' at line 1
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month set CHECK(Month>=1 and Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CHECK(Month>=1 and Month <=12)' at line 1
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month set BETWEEN (Month>=1 and Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BETWEEN (Month>=1 and Month <=12)' at line 1
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month set CONSTRAINT CHECK(Month>=1 and Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONSTRAINT CHECK(Month>=1 and Month <=12)' at line 1
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month set CONSTRAINT MONTH BETWEEN(Month>=1 and Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONSTRAINT MONTH BETWEEN(Month>=1 and Month <=12)' at line 1
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month set CONSTRAINT MONTH CHECK(Month>=1 and Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONSTRAINT MONTH CHECK(Month>=1 and Month <=12)' at line 1
+mysql> ALTER TABLE S_ATTENDANCE ALTER COLUMN Month set CONSTRAINT MONTH CHECK(Month <=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONSTRAINT MONTH CHECK(Month <=12)' at line 1
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FId           | varchar(10) | NO   |     | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  |     | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table S_COLLEGE change column FId FA_Id VARCHAR(10);
+Query OK, 0 rows affected (1.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table S_ATTENDANCE change column Month MONTH INT CHECK(MONTH>=1 AND MONTH<=12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CHECK(MONTH>=1 AND MONTH<=12)' at line 1
+mysql> create table xyz
+    -> ( Month int not null check(Month>=1 and Month<=12));
+Query OK, 0 rows affected (0.81 sec)
+
+mysql> drop table xyz;
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> desc S_ATTENDANCE;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| RNo        | char(9) | NO   | PRI | NULL    |       |
+| Month      | int(11) | NO   | PRI | NULL    |       |
+| Percentage | int(11) | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table S_ATTENDANCE add constraint CHECK(Month>=1 and Month<=12);
+Query OK, 0 rows affected (0.40 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc S_ATTENDANCE;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| RNo        | char(9) | NO   | PRI | NULL    |       |
+| Month      | int(11) | NO   | PRI | NULL    |       |
+| Percentage | int(11) | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc ADMIN;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| A_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| A_Password | varchar(15) | NO   |     | NULL    |       |
+| A_EmailId  | varchar(22) | NO   | UNI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | int(11)     | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR2;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FA_Id     | varchar(10) | NO   |     | NULL    |       |
+| FA_Degree | varchar(11) | NO   | PRI | NULL    |       |
+| FA_Branch | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Batch  | int(11)     | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc PATENT;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.PATENT' doesn't exist
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | int(11)     | YES  |     | NULL    |       |
+| P_MobileNo2 | int(11)     | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | int(11)     | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.01 sec)
+
+mysql> desc S_ATTENDANCE;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| RNo        | char(9) | NO   | PRI | NULL    |       |
+| Month      | int(11) | NO   | PRI | NULL    |       |
+| Percentage | int(11) | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL1
+    -> ;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into table S_PERSONAL1 values ('Gorantla', 'Meghana', 'F');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table S_PERSONAL1 values ('Gorantla', 'Meghana', 'F')' at line 1
+mysql> insert into S_PERSONAL1 values ('Gorantla', 'Meghana', 'F');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   |     | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | int(11)     | NO   | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 values ('COE16B041', 'Gorantla', 'Meghana', '1999-06-18', 8332886789, 'O+', 'Chiral, A.P.', 'Maggi833');
+ERROR 1264 (22003): Out of range value for column 'Mobile_No' at row 1
+mysql> insert into S_PERSONAL2 values ('COE16B041', 'Gorantla', 'Meghana', '1999-06-18', 83, 'O+', 'Chiral, A.P.', 'Maggi833');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> alter table S_PERSONAL2 alter column Mobile_No CHAR(10); 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CHAR(10)' at line 1
+mysql> alter table S_PERSONAL2 modify  column Mobile_No CHAR(10);
+Query OK, 1 row affected (1.37 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> update table S_PERSONAL2 set Mobile_No = '8332886789' where RNo='COE16B041';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table S_PERSONAL2 set Mobile_No = '8332886789' where RNo='COE16B041'' at line 1
+mysql> update table S_PERSONAL2 set Mobile_No = '8332886789' where RNo=COE16B041;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table S_PERSONAL2 set Mobile_No = '8332886789' where RNo=COE16B041' at line 1
+mysql> update S_PERSONAL2 set Mobile_No = '8332886789' where RNo='COE16B041';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SHOW TABLES;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   |     | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table S_PERSONAL2 add constraint foreign key(First_Name) references S_PERSONAL1(First_Name); 
+Query OK, 1 row affected (1.72 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  |     | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  |     | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values ('COE16B041', 'coe16b041@iiitdm.ac.in', 'BTech', 'COE', 4, 'COM01', 'Aswatha Girls Hostel', 910 );
+Query OK, 1 row affected (0.11 sec)
+
+mysql> alter table S_PERSONAL2 add constraint foreign key(RNo) references S_COLLEGE(RNo);
+Query OK, 1 row affected (1.48 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc S_HOSTEL;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Hostel_Name       | varchar(20) | NO   | PRI | NULL    |       |
+| Hostel_WardenName | varchar(20) | NO   |     | NULL    |       |
+| Hostel_LandlineNo | int(11)     | YES  |     | NULL    |       |
+| Warden_PhoneNo    | int(11)     | NO   |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_HOSTEL values('Aswatha Girls Hostel', 'Binsu', 044256789, 7654321983);
+ERROR 1264 (22003): Out of range value for column 'Warden_PhoneNo' at row 1
+mysql> insert into S_HOSTEL values('Aswatha Girls Hostel', 'Binsu', 0442567819, 7654321983);
+ERROR 1264 (22003): Out of range value for column 'Warden_PhoneNo' at row 1
+mysql> alter table S_HOSTEL modify Hostel_PhoneNo CHAR(10);
+ERROR 1054 (42S22): Unknown column 'Hostel_PhoneNo' in 'S_HOSTEL'
+mysql> alter table S_HOSTEL modify Warden_PhoneNo CHAR(10);
+Query OK, 0 rows affected (1.43 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table S_HOSTEL modify Hostel_LandlineNo VARCHAR(10);
+Query OK, 0 rows affected (1.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_HOSTEL values('Aswatha Girls Hostel', 'Binsu', 0442567819, 7654321983);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc ADMIN;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| A_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| A_Password | varchar(15) | NO   |     | NULL    |       |
+| A_EmailId  | varchar(22) | NO   | UNI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | int(11)     | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table F_ADVISOR1 modify FA_MobileNo VARCHAR(10);
+Query OK, 0 rows affected (1.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table F_ADVISOR1 modify FA_MobileNo CHAR(10);
+Query OK, 0 rows affected (1.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc F_ADVISOR2;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FA_Id     | varchar(10) | NO   |     | NULL    |       |
+| FA_Degree | varchar(11) | NO   | PRI | NULL    |       |
+| FA_Branch | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Batch  | int(11)     | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | int(11)     | YES  |     | NULL    |       |
+| P_MobileNo2 | int(11)     | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | int(11)     | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> alter table PARENT modify P_MobileNo1 CHAR(10);
+Query OK, 0 rows affected (1.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table PARENT modify P_MobileNo2 CHAR(10);
+Query OK, 0 rows affected (1.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table PARENT modify G_MobileNo CHAR(10);
+Query OK, 0 rows affected (1.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc ATTENDANCE;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.ATTENDANCE' doesn't exist
+mysql> desc S_ATTENDANCE;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| RNo        | char(9) | NO   | PRI | NULL    |       |
+| Month      | int(11) | NO   | PRI | NULL    |       |
+| Percentage | int(11) | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc S_GPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| SemNo | int(11)      | NO   | PRI | NULL    |       |
+| GPA   | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  |     | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  |     | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_HOSTEL;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Hostel_Name       | varchar(20) | NO   | PRI | NULL    |       |
+| Hostel_WardenName | varchar(20) | NO   |     | NULL    |       |
+| Hostel_LandlineNo | varchar(10) | YES  |     | NULL    |       |
+| Warden_PhoneNo    | char(10)    | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table S_PERSONAL2 modify MobileNo CHAR(10);
+ERROR 1054 (42S22): Unknown column 'MobileNo' in 'S_PERSONAL2'
+mysql> alter table S_PERSONAL2 modify Mobile_No CHAR(10);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into values('Telluri','Meghana Reddy','F');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values('Telluri','Meghana Reddy','F')' at line 1
+mysql> insert into S_PERSONAL1 values('Telluri','Meghana Reddy','F');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_PERSONAL1 values('Gunturu','Sowmya','F');
+Query OK, 1 row affected (0.41 sec)
+
+mysql> insert into S_PERSONAL1 values('Takkelapati','Harika','F');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_HOSTEL;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Hostel_Name       | varchar(20) | NO   | PRI | NULL    |       |
+| Hostel_WardenName | varchar(20) | NO   |     | NULL    |       |
+| Hostel_LandlineNo | varchar(10) | YES  |     | NULL    |       |
+| Warden_PhoneNo    | char(10)    | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_HOSTEL values ('Aswatha Boys Hostel', 'Noor Mohammad', '0442345672', '7812345689');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from S_HOSTEL;
++----------------------+-------------------+-------------------+----------------+
+| Hostel_Name          | Hostel_WardenName | Hostel_LandlineNo | Warden_PhoneNo |
++----------------------+-------------------+-------------------+----------------+
+| Aswatha Boys Hostel  | Noor Mohammad     | 0442345672        | 7812345689     |
+| Aswatha Girls Hostel | Binsu             | 442567819         | 7654321983     |
++----------------------+-------------------+-------------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_HOSTEL values ('Ashoka Boys Hostel', 'Noor Mohammad', '0442346572', '7812345689');
+Query OK, 1 row affected (0.42 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into S_GRADE values ('COE16B041', 'COM105P', 1, 'S');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into S_GRADE values ('COE16B041', 'COM105T', 1, 'S');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_GRADE values ('COE16B041', 'ELE103T', 2, 'S');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_GRADE values ('COE16B041', 'PHY107P', 2, 'A');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_GRADE values ('COE16B041', 'COM206T', 3, 'S');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_GRADE values ('COE16B041', 'MAT204T', 3, 'B');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> desc S_GPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| SemNo | int(11)      | NO   | PRI | NULL    |       |
+| GPA   | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into S_GPA values ('COE16B041', 1, 8.83);
+Query OK, 1 row affected (0.41 sec)
+
+mysql> insert into S_GPA values ('COE16B041', 2, 9.23);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_GPA values ('COE16B041', 3, 9.09);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> DESC S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_CGPA values('COE16B041', 9.02);
+Query OK, 1 row affected (0.38 sec)
+
+mysql> DESC S_ATTENDANCE;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| RNo        | char(9) | NO   | PRI | NULL    |       |
+| Month      | int(11) | NO   | PRI | NULL    |       |
+| Percentage | int(11) | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table S_ATTENDANCE add column Course_No VARCHAR(20);
+Query OK, 0 rows affected (0.77 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC S_ATTENDANCE;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| RNo        | char(9)     | NO   | PRI | NULL    |       |
+| Month      | int(11)     | NO   | PRI | NULL    |       |
+| Percentage | int(11)     | YES  |     | NULL    |       |
+| Course_No  | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> delete column Course_No from S_ATTENDANCE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column Course_No from S_ATTENDANCE' at line 1
+mysql> dROP column Course_No from S_ATTENDANCE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column Course_No from S_ATTENDANCE' at line 1
+mysql> drop column Course_No from S_ATTENDANCE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column Course_No from S_ATTENDANCE' at line 1
+mysql> alter table S_ATTENDANCE drop column Course_No;
+Query OK, 0 rows affected (0.87 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table S_ATTENDANCE alter Percentage Percentage VARCHAR(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Percentage VARCHAR(10)' at line 1
+mysql> alter table S_ATTENDANCE change Percentage Percentage VARCHAR(10);
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc S_ATTENDANCE;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| RNo        | char(9)     | NO   | PRI | NULL    |       |
+| Month      | int(11)     | NO   | PRI | NULL    |       |
+| Percentage | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table S_ATTENDANCE change Percentage Performance VARCHAR(10);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc S_ATTENDANCE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| Month       | int(11)     | NO   | PRI | NULL    |       |
+| Performance | varchar(10) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('COE16B041','3,'Good');
+    '> ;
+    '> ;
+    '> ^C
+mysql> insert into S_ATTENDANCE values
+    -> ('COE16B041',4,'Good');
+Query OK, 1 row affected (0.37 sec)
+
+mysql> insert into S_ATTENDANCE values ('COE16B041',1,'Good');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_ATTENDANCE values ('COE16B041',2,'Average');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into S_ATTENDANCE values ('COE16B041',3,'Poor');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values ('COE16B041', 'GORANTLA', 'SREE KRISHNA PRASAD', 'GORANTLA', 'ANITA', 'gskprasad@gmail.com', '9440471610', '9293600614', 'GORANTLA', 'JASWANTH RAYUDU', '8985848899', 'Maggi$833');
+Query OK, 1 row affected (0.42 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.01 sec)
+
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> inert into F_ADVISOR1 values ('COM01', 'BALA SUBRAMANYYAM', 'SIVALSELVEN', 'sivaselvanb@iiitdm.ac.in', 7654321890, 'sivaselvanb');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'inert into F_ADVISOR1 values ('COM01', 'BALA SUBRAMANYYAM', 'SIVALSELVEN', 'siva' at line 1
+mysql> insert into F_ADVISOR1 values ('COM01', 'BALA SUBRAMANYYAM', 'SIVALSELVEN', 'sivaselvanb@iiitdm.ac.in', 7654321890, 'sivaselvanb');
+Query OK, 1 row affected (0.43 sec)
+
+mysql> desc ADVIOSOR2;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.ADVIOSOR2' doesn't exist
+mysql> desc ADVISOR2;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.ADVISOR2' doesn't exist
+mysql> desc F_ADVISOR2;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FA_Id     | varchar(10) | NO   |     | NULL    |       |
+| FA_Degree | varchar(11) | NO   | PRI | NULL    |       |
+| FA_Branch | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Batch  | int(11)     | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR2 values('COM01', 'BTech', 'COE', 2016);
+Query OK, 1 row affected (0.20 sec)
+
+mysql> desc ADMIN;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| A_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| A_Password | varchar(15) | NO   |     | NULL    |       |
+| A_EmailId  | varchar(22) | NO   | UNI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into ADMIN values ('dinesh', 'dinesh123', 'dinesh1@gmail.com');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR2;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FA_Id     | varchar(10) | NO   |     | NULL    |       |
+| FA_Degree | varchar(11) | NO   | PRI | NULL    |       |
+| FA_Branch | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Batch  | int(11)     | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> alter table F_ADVISOR2 add constraint FOREIGN KEY(FA_Id) references F_ADVISOR1(FA_Id);
+Query OK, 1 row affected (1.73 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE
+    -> ;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  |     | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  |     | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table PARENT add constraint FOREIGN KEY(RNo) references S_COLLEGE(RNo);
+Query OK, 1 row affected (1.50 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc S_ATTENDANCE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| Month       | int(11)     | NO   | PRI | NULL    |       |
+| Performance | varchar(10) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table S_ATTENDANCE add constraint FOREIGN KEY(RNo) references S_COLLEGE(RNo);
+Query OK, 4 rows affected (1.16 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table S_CGPA add constraint FOREIGN KEY(RNo) references S_COLLEGE(RNo);
+Query OK, 1 row affected (1.24 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  |     | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  |     | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table S_COLLEGE add constraint FOREIGN KEY(FA_Id) references F_ADVISOR1(FA_Id);
+Query OK, 1 row affected (1.96 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc S_GPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| SemNo | int(11)      | NO   | PRI | NULL    |       |
+| GPA   | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table S_GPA add constraint FOREIGN KEY(RNo) references S_COLLEGE(RNo);
+Query OK, 3 rows affected (1.11 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> alter table S_GRADE add constraint FOREIGN KEY(RNo) references S_COLLEGE(RNo);
+Query OK, 6 rows affected (1.08 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> desc S_HOSTEL;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Hostel_Name       | varchar(20) | NO   | PRI | NULL    |       |
+| Hostel_WardenName | varchar(20) | NO   |     | NULL    |       |
+| Hostel_LandlineNo | varchar(10) | YES  |     | NULL    |       |
+| Warden_PhoneNo    | char(10)    | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  |     | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table S_COLLEGE add constraint FOREIGN KEY(Hostel_Name) references S_HOSTEL(Hostel_Name);
+Query OK, 1 row affected (2.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql>  alter table S_PERSONAL2 add constraint foreign key(First_Name) references S_PERSONAL1(First_Name); 
+Query OK, 1 row affected (1.64 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql>  alter table S_PERSONAL2 add constraint foreign key(Last_Name) references S_PERSONAL1(Last_Name);
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> select * from PERSONAL1
+    -> ;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.PERSONAL1' doesn't exist
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Takkelapati | Harika        | F      |
+| Telluri     | Meghana Reddy | F      |
++-------------+---------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from S_PERSONAL2;
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+| RNo       | First_Name | Last_Name | DOB        | Mobile_No  | Blood_Group | Address      | Password |
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+| COE16B041 | Gorantla   | Meghana   | 1999-06-18 | 8332886789 | O+          | Chiral, A.P. | Maggi833 |
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+1 row in set (0.00 sec)
+
+mysql>  alter table S_PERSONAL2 add constraint foreign key(First_Name) references S_PERSONAL1(First_Name);
+Query OK, 1 row affected (1.52 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql>  alter table S_PERSONAL2 add constraint foreign key(Last_Name) references S_PERSONAL1(Last_Name);
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Takkelapati | Harika        | F      |
+| Telluri     | Meghana Reddy | F      |
++-------------+---------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from S_PERSONAL2;
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+| RNo       | First_Name | Last_Name | DOB        | Mobile_No  | Blood_Group | Address      | Password |
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+| COE16B041 | Gorantla   | Meghana   | 1999-06-18 | 8332886789 | O+          | Chiral, A.P. | Maggi833 |
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+1 row in set (0.00 sec)
+
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> update S_PERSONAL1 set Last_Name = 'Reddy' where First_Name = 'Telluri';
+Query OK, 1 row affected (0.41 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  alter table S_PERSONAL2 add constraint foreign key(Last_Name) references S_PERSONAL1(Last_Name);
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> update S_PERSONAL1 set Last_Name = 'Meghana Reddy' where First_Name = 'Telluri';
+Query OK, 1 row affected (0.43 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Takkelapati | Harika        | F      |
+| Telluri     | Meghana Reddy | F      |
++-------------+---------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from S_PERSONAL2;
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+| RNo       | First_Name | Last_Name | DOB        | Mobile_No  | Blood_Group | Address      | Password |
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+| COE16B041 | Gorantla   | Meghana   | 1999-06-18 | 8332886789 | O+          | Chiral, A.P. | Maggi833 |
++-----------+------------+-----------+------------+------------+-------------+--------------+----------+
+1 row in set (0.00 sec)
+
+mysql> update S_PERSONAL2 set Last_Name = 'Meghana' where First_Name = 'Gorantla';
+Query OK, 0 rows affected (0.13 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update S_PERSONAL1 set Last_Name = 'Meghana' where First_Name = 'Gorantla';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>  alter table S_PERSONAL2 add constraint foreign key(Last_Name) references S_PERSONAL1(Last_Name);
+ERROR 1215 (HY000): Cannot add foreign key constraint
+mysql> insert into S_PERSONAL2 values
+    -> ('COE16B043','Telluri','Meghana Reddy','1999-02-08','9618402321','O+','Guntur,A.P.','Dolly123');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_PERSONAL2`, CONSTRAINT `S_PERSONAL2_ibfk_2` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> insert into S_PERSONAL2 values ('COE16B043','Telluri','Meghana Reddy','1999-02-08',9618402321,'O+','Guntur,A.P.','Dolly123');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_PERSONAL2`, CONSTRAINT `S_PERSONAL2_ibfk_2` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> S_COLLEGE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S_COLLEGE' at line 1
+mysql> insert into S_COLLEGE values ('COE16B043','Telluri','Meghana Reddy','1999-02-08',9618402321,'O+','Guntur,A.P.','Dolly123');
+ERROR 1406 (22001): Data too long for column 'Degree' at row 1
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ^C
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('COE16B043','coe16b043@iiitdm.ac.in','BTech','COE',4,COM01,'Aswatha Girls Hostel',905);
+ERROR 1054 (42S22): Unknown column 'COM01' in 'field list'
+mysql> insert into S_COLLEGE values ('COE16B043','coe16b043@iiitdm.ac.in','BTech','COE',4,'COM01','Aswatha Girls Hostel',905);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL1;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| First_Name | varchar(15) | NO   | PRI | NULL    |       |
+| Last_Name  | varchar(15) | NO   | PRI | NULL    |       |
+| Gender     | char(1)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values ('COE16B043','Telluri','Meghana Reddy','1999-02-08',9618402321,'O+','Guntur,A.P.','Dolly123');
+ERROR 1406 (22001): Data too long for column 'Degree' at row 1
+mysql> insert into S_PERSONAL2 values ('COE16B043','Telluri','Meghana Reddy','1999-02-08',9618402321,'O+','Guntur,A.P.','Dolly123');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> desc HOSTEL;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.HOSTEL' doesn't exist
+mysql> desc S_HOSTEL;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| Hostel_Name       | varchar(20) | NO   | PRI | NULL    |       |
+| Hostel_WardenName | varchar(20) | NO   |     | NULL    |       |
+| Hostel_LandlineNo | varchar(10) | YES  |     | NULL    |       |
+| Warden_PhoneNo    | char(10)    | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_ATTENDANCE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| Month       | int(11)     | NO   | PRI | NULL    |       |
+| Performance | varchar(10) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('COE16B043',1,'Good');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_ATTENDANCE values ('COE16B043',2,'Average');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into S_ATTENDANCE values ('COE16B043',3,'Good');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from S_ATTENDANCE;
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| COE16B041 |     1 | Good        |
+| COE16B041 |     2 | Average     |
+| COE16B041 |     3 | Poor        |
+| COE16B041 |     4 | Good        |
+| COE16B043 |     1 | Good        |
+| COE16B043 |     2 | Average     |
+| COE16B043 |     3 | Good        |
++-----------+-------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values ('COE16B043',4,'Good');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> select * from S_CGPA;
++-----------+------+
+| RNo       | Cgpa |
++-----------+------+
+| COE16B041 | 9.02 |
++-----------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into S_CGPA values
+    -> ('COE16B043',8.85);
+Query OK, 1 row affected (0.37 sec)
+
+mysql> desc S_GPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| SemNo | int(11)      | NO   | PRI | NULL    |       |
+| GPA   | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
++-----------+-------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into S_GPA values
+    -> ('COE16B043',1,8.61),
+    -> ('COE16B043',2,8.82),
+    -> ('COE16B043',3,8.85);
+Query OK, 3 rows affected (0.11 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from S_GRADE;
++-----------+-----------+-------+-------+
+| RNo       | Course_No | SemNo | Grade |
++-----------+-----------+-------+-------+
+| COE16B041 | COM105P   |     1 | S     |
+| COE16B041 | COM105T   |     1 | S     |
+| COE16B041 | COM206T   |     3 | S     |
+| COE16B041 | ELE103T   |     2 | S     |
+| COE16B041 | MAT204T   |     3 | B     |
+| COE16B041 | PHY107P   |     2 | A     |
++-----------+-----------+-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('COE16B043','PHY108T','S'),
+    -> ('COE16B043','COM105T','A');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_GRADE values ('COE16B043','PHY108T',1,'S'), ('COE16B043','COM105T',1,'A');
+Query OK, 2 rows affected (0.40 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('COE16B043','ELE103T',2,'S'), ('COE16B043','DES102T',2,'A');
+Query OK, 2 rows affected (0.42 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('COE16B043','COM206P',3,'S'), ('COE16B043','COM209P',3,'A');
+Query OK, 2 rows affected (0.41 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from PARENT;
++-----------+----------+---------------------+----------+---------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| RNo       | F_Fname  | F_Lname             | M_Fname  | M_Lname | P_EmailId           | P_MobileNo1 | P_MobileNo2 | G_Fname  | G_Lname         | G_MobileNo | P_Password |
++-----------+----------+---------------------+----------+---------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| COE16B041 | GORANTLA | SREE KRISHNA PRASAD | GORANTLA | ANITA   | gskprasad@gmail.com | 9440471610  | 9293600614  | GORANTLA | JASWANTH RAYUDU | 8985848899 | Maggi$833  |
++-----------+----------+---------------------+----------+---------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('COE16B043','Gorantla','Gangadhara Reddy','Kanchumarthy','Sri Devi','gtelluri@gmail.com','9849399738','9848458317');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into PARENT values ('COE16B043','Gorantla','Gangadhara Reddy','Kanchumarthy','Sri Devi','gtelluri@gmail.com','9849399738','9848458317',,,,'Dolly1223');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',,'Dolly1223')' at line 1
+mysql> insert into PARENT values ('COE16B043','Gorantla','Gangadhara Reddy','Kanchumarthy','Sri Devi','gtelluri@gmail.com','9849399738','9848458317','NUll','Null','Null','Dolly1223');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from PARENT;
++-----------+----------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| RNo       | F_Fname  | F_Lname             | M_Fname      | M_Lname  | P_EmailId           | P_MobileNo1 | P_MobileNo2 | G_Fname  | G_Lname         | G_MobileNo | P_Password |
++-----------+----------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| COE16B041 | GORANTLA | SREE KRISHNA PRASAD | GORANTLA     | ANITA    | gskprasad@gmail.com | 9440471610  | 9293600614  | GORANTLA | JASWANTH RAYUDU | 8985848899 | Maggi$833  |
+| COE16B043 | Gorantla | Gangadhara Reddy    | Kanchumarthy | Sri Devi | gtelluri@gmail.com  | 9849399738  | 9848458317  | NUll     | Null            | Null       | Dolly1223  |
++-----------+----------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('COE16B043','coe16b043@gmail.com','BTech','COE',4,'COM01','Aswatha Girls Hostel',906);
+ERROR 1062 (23000): Duplicate entry 'COE16B043' for key 'PRIMARY'
+mysql> insert into S_COLLEGE values ('COE16B042','coe16b042@gmail.com','BTech','COE',4,'COM01','Aswatha Girls Hostel',906);
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into table S_PERSONAL1 values
+    -> ('Maheswaran','Vineetha','F');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table S_PERSONAL1 values
+('Maheswaran','Vineetha','F')' at line 1
+mysql> insert intoS_PERSONAL1 values ('Maheswaran','Vineetha','F');
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.intoS_PERSONAL1' doesn't exist
+mysql> insert into S_PERSONAL1 values ('Maheswaran','Vineetha','F');
+Query OK, 1 row affected (0.41 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('COE16B042',1,'Good'),
+    -> ('COE16B042',2,'Average'),
+    -> ('COE16B042',3,'Average'),
+    -> ('COE16B043',4,'Good');
+ERROR 1062 (23000): Duplicate entry 'COE16B043-4' for key 'PRIMARY'
+mysql> insert into S_ATTENDANCE values ('COE16B042',1,'Good'), ('COE16B042',2,'Average'), ('COE16B042',3,'Average'), ('COE16B042',4,'Good');
+Query OK, 4 rows affected (0.09 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_CGPA values
+    -> ('COE16B042',8.98);
+Query OK, 1 row affected (0.45 sec)
+
+mysql> insert into S_GPA values ('COE16B042',1,8.78),('COE16B042',2,9.03),('COE16B043',3,8.92);
+ERROR 1062 (23000): Duplicate entry 'COE16B043-3' for key 'PRIMARY'
+mysql> insert into S_GPA values ('COE16B042',1,8.78),('COE16B042',2,9.03),('COE16B042',3,8.92);
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
++-----------+-------+------+
+9 rows in set (0.00 sec)
+
+mysql> DESC S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('COE16B042',MAT104T',1,'B'),
+    '> ('COE16B042','INT110P',1,'A');
+    '> ^C
+mysql> insert into S_GRADE values
+    -> ^C
+mysql> insert into S_GRADE values
+    -> ('COE16B042','MAT104T',1,'B'),
+    -> ('COE16B043','INT110P',1,'A');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('COE16B042','DES104P',2,'B'), ('COE16B043','ELE103T',2,'A');
+ERROR 1062 (23000): Duplicate entry 'COE16B043-ELE103T' for key 'PRIMARY'
+mysql> insert into S_GRADE values ('COE16B042','DES104P',2,'B'), ('COE16B042','ELE103T',2,'A');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('COE16B042','DES201T',3,'S'), ('COE16B042','COM205T',3,'A');
+Query OK, 2 rows affected (0.40 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * S_PERSONAL1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S_PERSONAL1' at line 1
+mysql> SELECT *  from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Maheswaran  | Vineetha      | F      |
+| Takkelapati | Harika        | F      |
+| Telluri     | Meghana Reddy | F      |
++-------------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *  from S_PERSONAL2;
++-----------+------------+---------------+------------+------------+-------------+--------------+----------+
+| RNo       | First_Name | Last_Name     | DOB        | Mobile_No  | Blood_Group | Address      | Password |
++-----------+------------+---------------+------------+------------+-------------+--------------+----------+
+| COE16B041 | Gorantla   | Meghana       | 1999-06-18 | 8332886789 | O+          | Chiral, A.P. | Maggi833 |
+| COE16B043 | Telluri    | Meghana Reddy | 1999-02-08 | 9618402321 | O+          | Guntur,A.P.  | Dolly123 |
++-----------+------------+---------------+------------+------------+-------------+--------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('COE16B042','Maheswaran','Vineetha','1999-07-24','9487117578','O+','Adyar,Chennai','Vini_123');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_PERSONAL1 values ('COE16B042','Maheswaran','Vineetha','1999-07-24',9487117578,'O+','Adyar,Chennai','Vini_123');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_PERSONAL1 values ('COE16B042','Maheswaran','Vineetha','1999-07-24',9487117578,'O+','Adyar,TN','Vini_123');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_PERSONAL2 values ('COE16B042','Maheswaran','Vineetha','1999-07-24',9487117578,'O+','Adyar,TN','Vini_123');
+Query OK, 1 row affected (0.44 sec)
+
+mysql> select * from ADMIN;
++--------+------------+-------------------+
+| A_Id   | A_Password | A_EmailId         |
++--------+------------+-------------------+
+| dinesh | dinesh123  | dinesh1@gmail.com |
++--------+------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from PARENT;
++-----------+----------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| RNo       | F_Fname  | F_Lname             | M_Fname      | M_Lname  | P_EmailId           | P_MobileNo1 | P_MobileNo2 | G_Fname  | G_Lname         | G_MobileNo | P_Password |
++-----------+----------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| COE16B041 | GORANTLA | SREE KRISHNA PRASAD | GORANTLA     | ANITA    | gskprasad@gmail.com | 9440471610  | 9293600614  | GORANTLA | JASWANTH RAYUDU | 8985848899 | Maggi$833  |
+| COE16B043 | Gorantla | Gangadhara Reddy    | Kanchumarthy | Sri Devi | gtelluri@gmail.com  | 9849399738  | 9848458317  | NUll     | Null            | Null       | Dolly1223  |
++-----------+----------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('COE16B042','Subramanian','Maheswaran','Subramanian','Divya','sm@gmail.com',8649757592,756984254,'Null','Null','Null','Vini_123');
+Query OK, 1 row affected (0.21 sec)
+
+mysql> update PARENT set F_Fname = 'Telluri' where RNo = 'COE16B043';
+Query OK, 1 row affected (0.43 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from PARENT;
++-----------+-------------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| RNo       | F_Fname     | F_Lname             | M_Fname      | M_Lname  | P_EmailId           | P_MobileNo1 | P_MobileNo2 | G_Fname  | G_Lname         | G_MobileNo | P_Password |
++-----------+-------------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+| COE16B041 | GORANTLA    | SREE KRISHNA PRASAD | GORANTLA     | ANITA    | gskprasad@gmail.com | 9440471610  | 9293600614  | GORANTLA | JASWANTH RAYUDU | 8985848899 | Maggi$833  |
+| COE16B042 | Subramanian | Maheswaran          | Subramanian  | Divya    | sm@gmail.com        | 8649757592  | 756984254   | Null     | Null            | Null       | Vini_123   |
+| COE16B043 | Telluri     | Gangadhara Reddy    | Kanchumarthy | Sri Devi | gtelluri@gmail.com  | 9849399738  | 9848458317  | NUll     | Null            | Null       | Dolly1223  |
++-----------+-------------+---------------------+--------------+----------+---------------------+-------------+-------------+----------+-----------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> shwo tables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'shwo tables' at line 1
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.01 sec)
+
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Maheswaran  | Vineetha      | F      |
+| Takkelapati | Harika        | F      |
+| Telluri     | Meghana Reddy | F      |
++-------------+---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('EDM16B035','edm16b035@gmail.com','BTech','EDM',4,'EDM01','Ashwatha Girls Hostel',909);
+ERROR 1406 (22001): Data too long for column 'Hostel_Name' at row 1
+mysql> insert into S_COLLEGE values ('EDM16B035','edm16b035@gmail.com','BTech','EDM',4,'EDM01','Aswatha Girls Hostel',909);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_COLLEGE`, CONSTRAINT `S_COLLEGE_ibfk_1` FOREIGN KEY (`FA_Id`) REFERENCES `F_ADVISOR1` (`FA_Id`))
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR1 values
+    -> ('EDM01','K','Selva Jyoti','kselvajyoti@gmail.com',8671549672,'ksj@789');
+Query OK, 1 row affected (0.41 sec)
+
+mysql> insert into S_COLLEGE values ('EDM16B035','edm16b035@gmail.com','BTech','EDM',4,'EDM01','Aswatha Girls Hostel',909);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> desc F_ADVISOR2;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| FA_Id     | varchar(10) | NO   | MUL | NULL    |       |
+| FA_Degree | varchar(11) | NO   | PRI | NULL    |       |
+| FA_Branch | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Batch  | int(11)     | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR2 values
+    -> ('EDM01','BTech','EDM',2016);
+Query OK, 1 row affected (0.38 sec)
+
+mysql> select * form F_ADVISOR2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form F_ADVISOR2' at line 1
+mysql> select * from F_ADVISOR2;
++-------+-----------+-----------+----------+
+| FA_Id | FA_Degree | FA_Branch | FA_Batch |
++-------+-----------+-----------+----------+
+| COM01 | BTech     | COE       |     2016 |
+| EDM01 | BTech     | EDM       |     2016 |
++-------+-----------+-----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('EDM16B035','Takkelapati','Srinivasan','Takkelapati','Madhavi Latha','tsr10@gmail.com',8964257816,9657425367,'Null','Null','Null','Harika$675');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> desc S_ATTENDANCE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| Month       | int(11)     | NO   | PRI | NULL    |       |
+| Performance | varchar(10) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('EDM16B035',1,'Good');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B035',2,'Average');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B035',3,'Good');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B035',4,'Good');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_CGPA values
+    -> ('EDM16B035',8.85);
+Query OK, 1 row affected (0.37 sec)
+
+mysql> desc S_GPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| SemNo | int(11)      | NO   | PRI | NULL    |       |
+| GPA   | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into S_GPA values
+    -> ('EDM16B035',1,8.34);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_GPA values ('EDM16B035',2,8.68);
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into S_GPA values ('EDM16B035',3,8.48);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select from S_COLLEGE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from S_COLLEGE' at line 1
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('EDM16B035','PHY107T',1,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into S_GRADE values ('EDM16B035','PHY107T',1,'S'),('EDM16B035','INT107T',1,'A');
+Query OK, 2 rows affected (0.23 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('EDM16B035,'DES105P',2,'S'),
+    '> ('EDM16B03','MAT105T',2,'A');
+    '> ;
+    '> ^C
+mysql> insert into S_GRADE values
+    ->  ('EDM16B035','DES105P',2,'S'),
+    -> ('EDM16B035','MAT105P',2,'A');
+Query OK, 2 rows affected (0.11 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values  ('EDM16B035','ELE217T',3,'S'), ('EDM16B035','ELE218T',3,'A');
+Query OK, 2 rows affected (0.62 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('EDM16B008','edm16b008@iiitdm.ac.in','BTech','EDM',4,'EDM01','Ashoka Boys Hostel',1405);
+Query OK, 1 row affected (0.41 sec)
+
+mysql> select * from S_HOSTEL;
++----------------------+-------------------+-------------------+----------------+
+| Hostel_Name          | Hostel_WardenName | Hostel_LandlineNo | Warden_PhoneNo |
++----------------------+-------------------+-------------------+----------------+
+| Ashoka Boys Hostel   | Noor Mohammad     | 0442346572        | 7812345689     |
+| Aswatha Boys Hostel  | Noor Mohammad     | 0442345672        | 7812345689     |
+| Aswatha Girls Hostel | Binsu             | 442567819         | 7654321983     |
++----------------------+-------------------+-------------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc S_PARENT;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.S_PARENT' doesn't exist
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('EDM16B008','Gatram','Mallikarjuna','Gatram','Radha','mallikarjuna@gmail.com',8574369875,7598534685,'Pratipati','Ravi Sekhar',8549631245,'Man@j');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Gatram','Manoj','M');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from S_PERSONAL2;
++-----------+------------+---------------+------------+------------+-------------+--------------+----------+
+| RNo       | First_Name | Last_Name     | DOB        | Mobile_No  | Blood_Group | Address      | Password |
++-----------+------------+---------------+------------+------------+-------------+--------------+----------+
+| COE16B041 | Gorantla   | Meghana       | 1999-06-18 | 8332886789 | O+          | Chiral, A.P. | Maggi833 |
+| COE16B042 | Maheswaran | Vineetha      | 1999-07-24 | 9487117578 | O+          | Adyar,TN     | Vini_123 |
+| COE16B043 | Telluri    | Meghana Reddy | 1999-02-08 | 9618402321 | O+          | Guntur,A.P.  | Dolly123 |
++-----------+------------+---------------+------------+------------+-------------+--------------+----------+
+3 rows in set (0.01 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ('EDM16B008','Gatram','Manoj','1999-08-16',8746953241,'B+','Chilaluripeta,AP','Man@j');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> desc S_ATTENDANCE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| Month       | int(11)     | NO   | PRI | NULL    |       |
+| Performance | varchar(10) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('EDM16B008',1,'Good');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B008',2,'Good');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B008',3,'Good');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B008',4,'Good');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from S_ATTENDANCE;
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| COE16B041 |     1 | Good        |
+| COE16B041 |     2 | Average     |
+| COE16B041 |     3 | Poor        |
+| COE16B041 |     4 | Good        |
+| COE16B042 |     1 | Good        |
+| COE16B042 |     2 | Average     |
+| COE16B042 |     3 | Average     |
+| COE16B042 |     4 | Good        |
+| COE16B043 |     1 | Good        |
+| COE16B043 |     2 | Average     |
+| COE16B043 |     3 | Good        |
+| COE16B043 |     4 | Good        |
+| EDM16B008 |     1 | Good        |
+| EDM16B008 |     2 | Good        |
+| EDM16B008 |     3 | Good        |
+| EDM16B008 |     4 | Good        |
+| EDM16B035 |     1 | Good        |
+| EDM16B035 |     2 | Average     |
+| EDM16B035 |     3 | Good        |
+| EDM16B035 |     4 | Good        |
++-----------+-------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_CGPA values
+    -> ('EDM16B008',8.82);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_GPA values ('EDM16B008',1,8.82);
+Query OK, 1 row affected (0.43 sec)
+
+mysql> insert into S_GPA values ('EDM16B008',2,8.85);
+Query OK, 1 row affected (0.43 sec)
+
+mysql> insert into S_GPA values ('EDM16B008',3,7.85);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
+| EDM16B008 |     1 | 8.82 |
+| EDM16B008 |     2 | 8.85 |
+| EDM16B008 |     3 | 7.85 |
+| EDM16B035 |     1 | 8.34 |
+| EDM16B035 |     2 | 8.68 |
+| EDM16B035 |     3 | 8.48 |
++-----------+-------+------+
+15 rows in set (0.00 sec)
+
+mysql> select * from S_CGPA;
++-----------+------+
+| RNo       | Cgpa |
++-----------+------+
+| COE16B041 | 9.02 |
+| COE16B042 | 8.98 |
+| COE16B043 | 8.85 |
+| EDM16B008 | 8.82 |
+| EDM16B035 | 8.85 |
++-----------+------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> DESC S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into S_GRADE values
+    -> ('EDM16B008',INT108T',1,'A'),
+    '> ('EDM16B008','INT109P','S');
+    '> ^C
+mysql> insert into S_GRADE values
+    -> ('EDM16B008','INT108T',1,'A'),
+    -> ('EDM16B008','INT109P','S');
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+mysql> insert into S_GRADE values ('EDM16B008','INT108T',1,'A'), ('EDM16B008','INT109P',1,'S');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EDM16B008','INT111P',2,'A'), ('EDM16B008','MAN102T',2,'S');
+Query OK, 2 rows affected (0.09 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EDM16B008','ELE223P',2,'A'), ('EDM16B008','ELE223T',3,'S');
+Query OK, 2 rows affected (0.09 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE
+    -> ;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('EDM16B038','edm16b010@gmail.com','BTech','EDM',4,'EDM01','Ashwatha Boys Hostel',1308);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_COLLEGE`, CONSTRAINT `S_COLLEGE_ibfk_2` FOREIGN KEY (`Hostel_Name`) REFERENCES `S_HOSTEL` (`Hostel_Name`))
+mysql> insert into S_COLLEGE values ('EDM16B038','edm16b010@gmail.com','BTech','EDM',4,'EDM01','Aswatha Boys Hostel',1308);
+Query OK, 1 row affected (0.42 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Yadavalli','Avinash','M');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Gatram      | Manoj         | M      |
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Maheswaran  | Vineetha      | F      |
+| Takkelapati | Harika        | F      |
+| Telluri     | Meghana Reddy | F      |
+| Yadavalli   | Avinash       | M      |
++-------------+---------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ('EDM16B038','Yadavalli','Avinash','1999-01-24',8642541357,'A-','Rajmundry,A.P','@vinah');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('EDM16B038','Yadavalli','Babu','Yadavalli','Sudha','yadavallibabu@gmail.com',8642513497,7598423648,'Charles','Gowrav',8469521349,'b@bu');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> select * from PARENT;
++-----------+-------------+---------------------+--------------+---------------+-------------------------+-------------+-------------+-----------+-----------------+------------+------------+
+| RNo       | F_Fname     | F_Lname             | M_Fname      | M_Lname       | P_EmailId               | P_MobileNo1 | P_MobileNo2 | G_Fname   | G_Lname         | G_MobileNo | P_Password |
++-----------+-------------+---------------------+--------------+---------------+-------------------------+-------------+-------------+-----------+-----------------+------------+------------+
+| COE16B041 | GORANTLA    | SREE KRISHNA PRASAD | GORANTLA     | ANITA         | gskprasad@gmail.com     | 9440471610  | 9293600614  | GORANTLA  | JASWANTH RAYUDU | 8985848899 | Maggi$833  |
+| COE16B042 | Subramanian | Maheswaran          | Subramanian  | Divya         | sm@gmail.com            | 8649757592  | 756984254   | Null      | Null            | Null       | Vini_123   |
+| COE16B043 | Telluri     | Gangadhara Reddy    | Kanchumarthy | Sri Devi      | gtelluri@gmail.com      | 9849399738  | 9848458317  | NUll      | Null            | Null       | Dolly1223  |
+| EDM16B008 | Gatram      | Mallikarjuna        | Gatram       | Radha         | mallikarjuna@gmail.com  | 8574369875  | 7598534685  | Pratipati | Ravi Sekhar     | 8549631245 | Man@j      |
+| EDM16B035 | Takkelapati | Srinivasan          | Takkelapati  | Madhavi Latha | tsr10@gmail.com         | 8964257816  | 9657425367  | Null      | Null            | Null       | Harika$675 |
+| EDM16B038 | Yadavalli   | Babu                | Yadavalli    | Sudha         | yadavallibabu@gmail.com | 8642513497  | 7598423648  | Charles   | Gowrav          | 8469521349 | b@bu       |
++-----------+-------------+---------------------+--------------+---------------+-------------------------+-------------+-------------+-----------+-----------------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> update PARENT set P_Password = 'subbu' where RNo = 'COE16B042';
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update PARENT set P_Password = 'g@nga' where RNo = 'COE16B043';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update PARENT set P_Password = 'g@tram!' where RNo = 'EDM16B008';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update PARENT set P_Password = 'tsr10' where RNo = 'EDM16B035';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from S_ATTENDANCE;
++-----------+-------+-------------+
+| RNo       | Month | Performance |
++-----------+-------+-------------+
+| COE16B041 |     1 | Good        |
+| COE16B041 |     2 | Average     |
+| COE16B041 |     3 | Poor        |
+| COE16B041 |     4 | Good        |
+| COE16B042 |     1 | Good        |
+| COE16B042 |     2 | Average     |
+| COE16B042 |     3 | Average     |
+| COE16B042 |     4 | Good        |
+| COE16B043 |     1 | Good        |
+| COE16B043 |     2 | Average     |
+| COE16B043 |     3 | Good        |
+| COE16B043 |     4 | Good        |
+| EDM16B008 |     1 | Good        |
+| EDM16B008 |     2 | Good        |
+| EDM16B008 |     3 | Good        |
+| EDM16B008 |     4 | Good        |
+| EDM16B035 |     1 | Good        |
+| EDM16B035 |     2 | Average     |
+| EDM16B035 |     3 | Good        |
+| EDM16B035 |     4 | Good        |
++-----------+-------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('EDM16B038',1,'Good');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B038',2,'Poor');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B038',2,'Good');
+ERROR 1062 (23000): Duplicate entry 'EDM16B038-2' for key 'PRIMARY'
+mysql> insert into S_ATTENDANCE values ('EDM16B038',3,'Good');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_ATTENDANCE values ('EDM16B038',2,'Good');
+ERROR 1062 (23000): Duplicate entry 'EDM16B038-2' for key 'PRIMARY'
+mysql> insert into S_ATTENDANCE values ('EDM16B038',4,'Good');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc CGPA;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.CGPA' doesn't exist
+mysql> desc S_CGPA;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| RNo   | char(9)      | NO   | PRI | NULL    |       |
+| Cgpa  | decimal(3,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_CGPA values
+    -> ('EDM6B038',8.01);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_CGPA`, CONSTRAINT `S_CGPA_ibfk_1` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> insert into S_CGPA values ('EDM16B038',8.01);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_GPA values ('EDM16B038',1,8.23);
+Query OK, 1 row affected (0.42 sec)
+
+mysql> insert into S_GPA values ('EDM16B038',2,7.90);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_GPA values ('EDM16B038',3,8.85);
+Query OK, 1 row affected (0.37 sec)
+
+mysql> select * from GPA;
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.GPA' doesn't exist
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
+| EDM16B008 |     1 | 8.82 |
+| EDM16B008 |     2 | 8.85 |
+| EDM16B008 |     3 | 7.85 |
+| EDM16B035 |     1 | 8.34 |
+| EDM16B035 |     2 | 8.68 |
+| EDM16B035 |     3 | 8.48 |
+| EDM16B038 |     1 | 8.23 |
+| EDM16B038 |     2 | 7.90 |
+| EDM16B038 |     3 | 8.85 |
++-----------+-------+------+
+18 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('EDM16B038','DES103T',1,'A'),
+    -> ('EDM16B038','MAT104T','B');
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+mysql> insert into S_GRADE values ('EDM16B038','DES103T',1,'A'), ('EDM16B038','MAT104T',1,'B');
+Query OK, 2 rows affected (0.40 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EDM16B038','INT111P',1,'A'), ('EDM16B038','PHY107T',2,'B');
+Query OK, 2 rows affected (0.11 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EDM16B038','DES210T',1,'A'), ('EDM16B038','MAT204T',3,'S');
+Query OK, 2 rows affected (0.12 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EDM16B038','DES210T',3,'A'), ('EDM16B038','MAT204T',3,'S');
+ERROR 1062 (23000): Duplicate entry 'EDM16B038-DES210T' for key 'PRIMARY'
+mysql> select * from S_GRADE;
++-----------+-----------+-------+-------+
+| RNo       | Course_No | SemNo | Grade |
++-----------+-----------+-------+-------+
+| COE16B041 | COM105P   |     1 | S     |
+| COE16B041 | COM105T   |     1 | S     |
+| COE16B041 | COM206T   |     3 | S     |
+| COE16B041 | ELE103T   |     2 | S     |
+| COE16B041 | MAT204T   |     3 | B     |
+| COE16B041 | PHY107P   |     2 | A     |
+| COE16B042 | COM205T   |     3 | A     |
+| COE16B042 | DES104P   |     2 | B     |
+| COE16B042 | DES201T   |     3 | S     |
+| COE16B042 | ELE103T   |     2 | A     |
+| COE16B042 | MAT104T   |     1 | B     |
+| COE16B043 | COM105T   |     1 | A     |
+| COE16B043 | COM206P   |     3 | S     |
+| COE16B043 | COM209P   |     3 | A     |
+| COE16B043 | DES102T   |     2 | A     |
+| COE16B043 | ELE103T   |     2 | S     |
+| COE16B043 | INT110P   |     1 | A     |
+| COE16B043 | PHY108T   |     1 | S     |
+| EDM16B008 | ELE223P   |     2 | A     |
+| EDM16B008 | ELE223T   |     3 | S     |
+| EDM16B008 | INT108T   |     1 | A     |
+| EDM16B008 | INT109P   |     1 | S     |
+| EDM16B008 | INT111P   |     2 | A     |
+| EDM16B008 | MAN102T   |     2 | S     |
+| EDM16B035 | DES105P   |     2 | S     |
+| EDM16B035 | ELE217T   |     3 | S     |
+| EDM16B035 | ELE218T   |     3 | A     |
+| EDM16B035 | INT107T   |     1 | A     |
+| EDM16B035 | MAT105P   |     2 | A     |
+| EDM16B035 | PHY107T   |     1 | S     |
+| EDM16B038 | DES103T   |     1 | A     |
+| EDM16B038 | DES210T   |     1 | A     |
+| EDM16B038 | INT111P   |     1 | A     |
+| EDM16B038 | MAT104T   |     1 | B     |
+| EDM16B038 | MAT204T   |     3 | S     |
+| EDM16B038 | PHY107T   |     2 | B     |
++-----------+-----------+-------+-------+
+36 rows in set (0.01 sec)
+
+mysql> update S_GRADE set SemNo = 3 where Course_No = 'DES201T';
+Query OK, 0 rows affected (0.07 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update S_GRADE set SemNo = 2 where Course_No = 'INT111P';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+
+mysql> select * from S_GRADE;
++-----------+-----------+-------+-------+
+| RNo       | Course_No | SemNo | Grade |
++-----------+-----------+-------+-------+
+| COE16B041 | COM105P   |     1 | S     |
+| COE16B041 | COM105T   |     1 | S     |
+| COE16B041 | COM206T   |     3 | S     |
+| COE16B041 | ELE103T   |     2 | S     |
+| COE16B041 | MAT204T   |     3 | B     |
+| COE16B041 | PHY107P   |     2 | A     |
+| COE16B042 | COM205T   |     3 | A     |
+| COE16B042 | DES104P   |     2 | B     |
+| COE16B042 | DES201T   |     3 | S     |
+| COE16B042 | ELE103T   |     2 | A     |
+| COE16B042 | MAT104T   |     1 | B     |
+| COE16B043 | COM105T   |     1 | A     |
+| COE16B043 | COM206P   |     3 | S     |
+| COE16B043 | COM209P   |     3 | A     |
+| COE16B043 | DES102T   |     2 | A     |
+| COE16B043 | ELE103T   |     2 | S     |
+| COE16B043 | INT110P   |     1 | A     |
+| COE16B043 | PHY108T   |     1 | S     |
+| EDM16B008 | ELE223P   |     2 | A     |
+| EDM16B008 | ELE223T   |     3 | S     |
+| EDM16B008 | INT108T   |     1 | A     |
+| EDM16B008 | INT109P   |     1 | S     |
+| EDM16B008 | INT111P   |     2 | A     |
+| EDM16B008 | MAN102T   |     2 | S     |
+| EDM16B035 | DES105P   |     2 | S     |
+| EDM16B035 | ELE217T   |     3 | S     |
+| EDM16B035 | ELE218T   |     3 | A     |
+| EDM16B035 | INT107T   |     1 | A     |
+| EDM16B035 | MAT105P   |     2 | A     |
+| EDM16B035 | PHY107T   |     1 | S     |
+| EDM16B038 | DES103T   |     1 | A     |
+| EDM16B038 | DES210T   |     1 | A     |
+| EDM16B038 | INT111P   |     2 | A     |
+| EDM16B038 | MAT104T   |     1 | B     |
+| EDM16B038 | MAT204T   |     3 | S     |
+| EDM16B038 | PHY107T   |     2 | B     |
++-----------+-----------+-------+-------+
+36 rows in set (0.00 sec)
+
+mysql> update S_GRADE set SemNo = 3 where Course_No = 'DES210T';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from S_GRADE;
++-----------+-----------+-------+-------+
+| RNo       | Course_No | SemNo | Grade |
++-----------+-----------+-------+-------+
+| COE16B041 | COM105P   |     1 | S     |
+| COE16B041 | COM105T   |     1 | S     |
+| COE16B041 | COM206T   |     3 | S     |
+| COE16B041 | ELE103T   |     2 | S     |
+| COE16B041 | MAT204T   |     3 | B     |
+| COE16B041 | PHY107P   |     2 | A     |
+| COE16B042 | COM205T   |     3 | A     |
+| COE16B042 | DES104P   |     2 | B     |
+| COE16B042 | DES201T   |     3 | S     |
+| COE16B042 | ELE103T   |     2 | A     |
+| COE16B042 | MAT104T   |     1 | B     |
+| COE16B043 | COM105T   |     1 | A     |
+| COE16B043 | COM206P   |     3 | S     |
+| COE16B043 | COM209P   |     3 | A     |
+| COE16B043 | DES102T   |     2 | A     |
+| COE16B043 | ELE103T   |     2 | S     |
+| COE16B043 | INT110P   |     1 | A     |
+| COE16B043 | PHY108T   |     1 | S     |
+| EDM16B008 | ELE223P   |     2 | A     |
+| EDM16B008 | ELE223T   |     3 | S     |
+| EDM16B008 | INT108T   |     1 | A     |
+| EDM16B008 | INT109P   |     1 | S     |
+| EDM16B008 | INT111P   |     2 | A     |
+| EDM16B008 | MAN102T   |     2 | S     |
+| EDM16B035 | DES105P   |     2 | S     |
+| EDM16B035 | ELE217T   |     3 | S     |
+| EDM16B035 | ELE218T   |     3 | A     |
+| EDM16B035 | INT107T   |     1 | A     |
+| EDM16B035 | MAT105P   |     2 | A     |
+| EDM16B035 | PHY107T   |     1 | S     |
+| EDM16B038 | DES103T   |     1 | A     |
+| EDM16B038 | DES210T   |     3 | A     |
+| EDM16B038 | INT111P   |     2 | A     |
+| EDM16B038 | MAT104T   |     1 | B     |
+| EDM16B038 | MAT204T   |     3 | S     |
+| EDM16B038 | PHY107T   |     2 | B     |
++-----------+-----------+-------+-------+
+36 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Mamidi','Snigdha','F');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('EVD16B010','evd16i010@iiitdm.ac.in','DD','EVD',4,'EVD01','Aswatha Girls Hostel',1005);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_COLLEGE`, CONSTRAINT `S_COLLEGE_ibfk_1` FOREIGN KEY (`FA_Id`) REFERENCES `F_ADVISOR1` (`FA_Id`))
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR1 values
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> insert into S_COLLEGE values ('EVD16B010','evd16i010@iiitdm.ac.in','DD','EVD',4,'EDM01','Aswatha Girls Hostel',1005);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> update S_COLLEGE set RNo = 'EVD16I010' where Degree = 'DD';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into S_PERSONAL2 values
+    -> ('EVD16I010','Mamidi','Snigdha','1999-04-23',7598423651,'B+','Vizag,A.P.','sniggy');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('EVD16I010',1,'Good');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into S_ATTENDANCE values ('EVD16I010',2,'Average');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_ATTENDANCE values ('EVD16I010',2,'Poor');
+ERROR 1062 (23000): Duplicate entry 'EVD16I010-2' for key 'PRIMARY'
+mysql> insert into S_ATTENDANCE values ('EVD16I010',3,'Poor');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_ATTENDANCE values ('EVD16I010',4,'Poor');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into S_CGPA values
+    -> ('EVD16I010',8.89);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into S_GPA values ('EVD16I010',1,8.49);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_GPA values ('EVD16I010',2,8.64);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into S_GPA values ('EVD16I010',3,8.85);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('EVD16I010','Mamidi','Venkatarao','Mamidi','Sowjanya','mvenkatarao@gmail.com',759842654,8964512357,'Talluri','Venkatesh',7598426586,'venky');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('EVD16I010','DES103T',1,'S'),
+    -> ('EVD16I010','COM105T',1,'A');
+Query OK, 2 rows affected (0.08 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EVD16I010','DES102T',2,'S'), ('EVD16I010','MAT105T',2,'C');
+Query OK, 2 rows affected (0.12 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EVD16I010','MAT204T',3,'A'), ('EVD16I010','MAN201T',3,'C');
+Query OK, 2 rows affected (0.11 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from S_PERSONAL2;
++-----------+------------+---------------+------------+------------+-------------+------------------+----------+
+| RNo       | First_Name | Last_Name     | DOB        | Mobile_No  | Blood_Group | Address          | Password |
++-----------+------------+---------------+------------+------------+-------------+------------------+----------+
+| COE16B041 | Gorantla   | Meghana       | 1999-06-18 | 8332886789 | O+          | Chiral, A.P.     | Maggi833 |
+| COE16B042 | Maheswaran | Vineetha      | 1999-07-24 | 9487117578 | O+          | Adyar,TN         | Vini_123 |
+| COE16B043 | Telluri    | Meghana Reddy | 1999-02-08 | 9618402321 | O+          | Guntur,A.P.      | Dolly123 |
+| EDM16B008 | Gatram     | Manoj         | 1999-08-16 | 8746953241 | B+          | Chilaluripeta,AP | Man@j    |
+| EDM16B038 | Yadavalli  | Avinash       | 1999-01-24 | 8642541357 | A-          | Rajmundry,A.P    | @vinah   |
+| EVD16I010 | Mamidi     | Snigdha       | 1999-04-23 | 7598423651 | B+          | Vizag,A.P.       | sniggy   |
++-----------+------------+---------------+------------+------------+-------------+------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Gondayala','Phani','M');
+Query OK, 1 row affected (0.46 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('EVD16I018','evd16i018@iiitdm.ac.in','DD','EVD',4,'EDM01','Ashoka Boys Hostel',201);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ('EVD16I018','Gondayala','Phani','1998-02-18',7598426541,'A-','Bhimavaram,AP','Phan!');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('EVD16I018','Gondayala','JayRam','Gondayala','Gayathri','gondayala@gmail.com','7123456895,9456871235,'Gali','Tanmai',7598426541,'Gond@');
+    '> ^C
+mysql> insert into PARENT values ('EVD16I018','Gondayala','JayRam','Gondayala','Gayathri','gondayala@gmail.com',7123456895,9456871235,'Gali','Tanmai',7598426541,'Gond@');
+Query OK, 1 row affected (0.42 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('EVD16I018',1,'Poor');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into S_ATTENDANCE values ('EVD16I018',2,'Good');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_ATTENDANCE values ('EVD16I018',3,'Average');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into S_ATTENDANCE values ('EVD16I018',4,'Poor');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into S_CGPA values
+    -> ('EVD16I018',8.90);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_GPA values ('EVD16I018',1,8.78);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_GPA values ('EVD16I018',2,7.90);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into S_GPA values ('EVD16I018',3,9.50);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into S_GRADE values
+    -> ('EVD16I018','INT108T','B'),
+    -> ('EVD16I018','COM105T','S');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_GRADE values ('EVD16I018','INT108T',1,'B'), ('EVD16I018','COM105T',1,'S');
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EVD16I018','PHY107T',2,'A'), ('EVD16I018','PHY107P',2,'S');
+Query OK, 2 rows affected (0.08 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('EVD16I018','MAT204T',3,'S'), ('EVD16I018','ELE223P',3,'S');
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Tatavarthy','Prasanna');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_PERSONAL1 values ('Tatavarthy','Prasanna','F');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 Values
+    -> l;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'l' at line 2
+mysql> insert into S_PERSONAL2 values
+    -> (
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into S_PERSONAL2 values 
+    -> ('MFD15I033','Tatavarthy','Prasanna','1997-09-23',7598426575,'A-','Vijayawada,AP','T@t@');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_PERSONAL2`, CONSTRAINT `S_PERSONAL2_ibfk_2` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('MFD15I033','mfd15i033@iiitdm.ac.in','DD','MFD',6,'COM01','Ashoka Boys Hostel',100);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_PERSONAL2 values  ('MFD15I033','Tatavarthy','Prasanna','1997-09-23',7598426575,'A-','Vijayawada,AP','T@t@');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('MFD15I033','Tatavarthy','Srinivasrao','Bhagavathula','Pavitra
+    '> ;
+    '> ^C
+mysql> insert into PARENT vaalues ('MFD15I033','Tatavarthy','Srinivasrao','Tatavarthy','Lalitha','tata@gmail.com',7598426576,8698425613,'Sharma','Vineesh',8456987455,'&%$'0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'vaalues ('MFD15I033','Tatavarthy','Srinivasrao','Tatavarthy','Lalitha','tata@gma' at line 1
+mysql> insert into PARENT values ('MFD15I033','Tatavarthy','Srinivasrao','Tatavarthy','Lalitha','tata@gmail.com',7598426576,8698425613,'Sharma','Vineesh',8456987455,'&%$'0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0' at line 1
+mysql> insert into PARENT values ('MFD15I033','Tatavarthy','Srinivasrao','Tatavarthy','Lalitha','tata@gmail.com',7598426576,8698425613,'Sharma','Vineesh',8456987455,'&%$');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('MFD15I033',1,'Good');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into S_ATTENDANCE values ('MFD15I033',2,'Poor');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into S_ATTENDANCE values ('MFD15I033',3,'Poor');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into S_ATTENDANCE values ('MFD15I033',4,'Poor');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_CGPA values
+    -> ('MFD15I033',8.90)
+    -> ;
+Query OK, 1 row affected (0.37 sec)
+
+mysql> insert into S_GPA values ('MFD15I033',1,8.20);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_GPA values ('MFD15I033',2,8.47);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into S_GPA values ('MFD15I033',3,9.07);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_GRADE values
+    -> ('MFD16I033','DES222T',1,'S');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_GRADE`, CONSTRAINT `S_GRADE_ibfk_1` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> insert into S_GRADE values ('MFD15I033','ELE103T',1,'S');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033','DES103T',1,'S');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033','COM105T',2,'S');
+Query OK, 1 row affected (0.41 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033','MAN102T',2,'C');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033','DES229P',3,'A');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033','MEC103T',3,'B');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033','DES120P',3,'S');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from F_ADVISOR1;
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| FA_Id | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo | FA_Password |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| COM01 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| EDM01 | K                 | Selva Jyoti | kselvajyoti@gmail.com    | 8671549672  | ksj@789     |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from F_ADVISOR2;
++-------+-----------+-----------+----------+
+| FA_Id | FA_Degree | FA_Branch | FA_Batch |
++-------+-----------+-----------+----------+
+| COM01 | BTech     | COE       |     2016 |
+| EDM01 | BTech     | EDM       |     2016 |
++-------+-----------+-----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Dondapati','MohanVamsi','M');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR values
+    -> ('MDM01','Srinivan','Pandian','srpandian@gmail.com',8125463254,'srpan##');
+ERROR 1146 (42S02): Table 'P_S_FA_Interaction.F_ADVISOR' doesn't exist
+mysql> insert into F_ADVISOR1 values ('MDM01','Srinivan','Pandian','srpandian@gmail.com',8125463254,'srpan##');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('MDM17B016','mdm16b016@iiitdm.ac.in','BTech','MDM',2,'MDM01','Aswatha Boys Hostel',512);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values ('Dondapati','MohanVamsi','M');
+ERROR 1062 (23000): Duplicate entry 'Dondapati-MohanVamsi' for key 'PRIMARY'
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ('MDM17B016','Dondapati','MohanVamsi','2000-03-20',9547895785,'O+','Hyderabad,AP','vamsi2000');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT value
+    -> ('MDM17B016','Dondapati','Shasank','Dondapati','Neha','dondapatis@gmail.com',9845684217,7598123654,'Kurra','Harshita',9847895897,'dond@');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('MDM17B016',1,'Good');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_ATTENDANCE values ('MDM17B016',2,'Good');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_ATTENDANCE values ('MDM17B016',3,'Good');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_ATTENDANCE values ('MDM17B016',4,'Good');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into S_CGPA values
+    -> ('MDM17B016',9.60);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_GPA values ('MDM17B016',1,9.2);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_GPA values ('MDM17B016',2,9.4);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into S_GPA values ('MDM17B016',3,9.8);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> desc S_GRADE;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RNo       | char(9)     | NO   | PRI | NULL    |       |
+| Course_No | varchar(20) | NO   | PRI | NULL    |       |
+| SemNo     | int(11)     | YES  |     | NULL    |       |
+| Grade     | char(1)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values
+    -> ('MDM17B016','MEC102T',1,'S'),('MDM17B016','PHY107T','A');
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+mysql> insert into S_GRADE values ('MDM17B016','MEC102T',1,'S'),('MDM17B016','PHY107T',1,'A');
+Query OK, 2 rows affected (0.42 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('MDM17B016','MEC2233P',2,'S'),('MDM17B016','DES111P',2,'B');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into S_GRADE values ('MDM17B016','MEC121',3,'S'),('MDM17B016','DES121P',3,'S');
+Query OK, 2 rows affected (0.47 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
+| MDM17B016 | mdm16b016@iiitdm.ac.in | BTech  | MDM    |     2 | MDM01 | Aswatha Boys Hostel  |           512 |
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel   |           100 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> insert into S_PERSONAL1 values
+    -> ('Bharath','Chandra');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into S_PERSONAL1 values ('Bharath','Chandra','M');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> desc F_ADVISOR1;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FA_Id       | varchar(10) | NO   | PRI | NULL    |       |
+| FA_Fname    | varchar(20) | YES  |     | NULL    |       |
+| FA_Lname    | varchar(20) | YES  |     | NULL    |       |
+| FA_EmailId  | varchar(30) | NO   | UNI | NULL    |       |
+| FA_MobileNo | char(10)    | YES  |     | NULL    |       |
+| FA_Password | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR1 values
+    -> ('CDS01','Sadagopan','Narasimhan','sady@iiitdm.ac.in',9874563214,'s@DDY');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> desc S_COLLEGE;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| RNo           | char(9)     | NO   | PRI | NULL    |       |
+| EmailId       | char(22)    | NO   | UNI | NULL    |       |
+| Degree        | varchar(11) | NO   |     | NULL    |       |
+| Branch        | varchar(10) | NO   |     | NULL    |       |
+| SemNo         | int(11)     | YES  |     | NULL    |       |
+| FA_Id         | varchar(10) | YES  | MUL | NULL    |       |
+| Hostel_Name   | varchar(20) | YES  | MUL | NULL    |       |
+| Hostel_RoomNo | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> insert into S_COLLEGE values
+    -> ('CDS17M001','cds17m001@iiitdm.ac.in','MDES','CDS',2,'CDS01','Ashoka Boys Hostel',415);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> desc S_PERSONAL2;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| First_Name  | varchar(15) | NO   | MUL | NULL    |       |
+| Last_Name   | varchar(15) | NO   |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
+| Mobile_No   | char(10)    | YES  | UNI | NULL    |       |
+| Blood_Group | varchar(3)  | YES  |     | NULL    |       |
+| Address     | varchar(30) | NO   |     | NULL    |       |
+| Password    | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> insert into S_PERSONAL2 values
+    -> ('CDS17M001','Bharath','Chandra','1996-03-02',7598426786,'B+','Warangal,AP','Bharath');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> desc PARENT;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| RNo         | char(9)     | NO   | PRI | NULL    |       |
+| F_Fname     | varchar(20) | YES  |     | NULL    |       |
+| F_Lname     | varchar(20) | YES  |     | NULL    |       |
+| M_Fname     | varchar(20) | YES  |     | NULL    |       |
+| M_Lname     | varchar(20) | YES  |     | NULL    |       |
+| P_EmailId   | varchar(40) | YES  |     | NULL    |       |
+| P_MobileNo1 | char(10)    | YES  |     | NULL    |       |
+| P_MobileNo2 | char(10)    | YES  |     | NULL    |       |
+| G_Fname     | varchar(20) | YES  |     | NULL    |       |
+| G_Lname     | varchar(20) | YES  |     | NULL    |       |
+| G_MobileNo  | char(10)    | YES  |     | NULL    |       |
+| P_Password  | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> insert into PARENT values
+    -> ('CDS17M001','Bharath','Ravi','Bharath','Sri Malli','bharath@gmail.com',7598453289,9874562548,'Kona','Harshita',7598425668,'@!123');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_ATTENDANCE values
+    -> ('CDS17M001',1,'Good');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into S_ATTENDANCE values ('CDS17M001',2,'Good');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into S_ATTENDANCE values ('CDS17M001',3,'Good');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_ATTENDANCE values ('CDS17M001',4,'Good');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| CDS17M001 | cds17m001@iiitdm.ac.in | MDES   | CDS    |     2 | CDS01 | Ashoka Boys Hostel   |           415 |
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
+| MDM17B016 | mdm16b016@iiitdm.ac.in | BTech  | MDM    |     2 | MDM01 | Aswatha Boys Hostel  |           512 |
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel   |           100 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from F_ADVISOR1;
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| FA_Id | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo | FA_Password |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| CDS01 | Sadagopan         | Narasimhan  | sady@iiitdm.ac.in        | 9874563214  | s@DDY       |
+| COM01 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| EDM01 | K                 | Selva Jyoti | kselvajyoti@gmail.com    | 8671549672  | ksj@789     |
+| MDM01 | Srinivan          | Pandian     | srpandian@gmail.com      | 8125463254  | srpan##     |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into S_CGPA values
+    -> ('CDS17M001',8.82);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_GPA values ('CDS17M001',1,8.82);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into S_GRADE values ('CDS17M001','MAT333T,'S');
+    '> ;
+    '> ^C
+mysql> insert into S_GRADE values ('CDS17M001','MAT333T,1,'S');
+    '> ^C
+mysql> insert into S_GRADE values ('CDS17M001','MAT333T',1,'S');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into S_GRADE values ('CDS17M001','DES323T',1,'A');
+Query OK, 1 row affected (0.43 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_P_S_FA_Interaction |
++------------------------------+
+| ADMIN                        |
+| F_ADVISOR1                   |
+| F_ADVISOR2                   |
+| PARENT                       |
+| S_ATTENDANCE                 |
+| S_CGPA                       |
+| S_COLLEGE                    |
+| S_GPA                        |
+| S_GRADE                      |
+| S_HOSTEL                     |
+| S_PERSONAL1                  |
+| S_PERSONAL2                  |
++------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> show S_GPA;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S_GPA' at line 1
+mysql> select * from  S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| CDS17M001 |     1 | 8.82 |
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
+| EDM16B008 |     1 | 8.82 |
+| EDM16B008 |     2 | 8.85 |
+| EDM16B008 |     3 | 7.85 |
+| EDM16B035 |     1 | 8.34 |
+| EDM16B035 |     2 | 8.68 |
+| EDM16B035 |     3 | 8.48 |
+| EDM16B038 |     1 | 8.23 |
+| EDM16B038 |     2 | 7.90 |
+| EDM16B038 |     3 | 8.85 |
+| EVD16I010 |     1 | 8.49 |
+| EVD16I010 |     2 | 8.64 |
+| EVD16I010 |     3 | 8.85 |
+| EVD16I018 |     1 | 8.78 |
+| EVD16I018 |     2 | 7.90 |
+| EVD16I018 |     3 | 9.50 |
+| MDM17B016 |     1 | 9.20 |
+| MDM17B016 |     2 | 9.40 |
+| MDM17B016 |     3 | 9.80 |
+| MFD15I033 |     1 | 8.20 |
+| MFD15I033 |     2 | 8.47 |
+| MFD15I033 |     3 | 9.07 |
++-----------+-------+------+
+31 rows in set (0.00 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| CDS17M001 | cds17m001@iiitdm.ac.in | MDES   | CDS    |     2 | CDS01 | Ashoka Boys Hostel   |           415 |
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
+| MDM17B016 | mdm16b016@iiitdm.ac.in | BTech  | MDM    |     2 | MDM01 | Aswatha Boys Hostel  |           512 |
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel   |           100 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> delete * from S_GPA where RNo = 'MDM16B016';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from S_GPA where RNo = 'MDM16B016'' at line 1
+mysql> delete * from S_GPA where RNo = 'MDM16B017';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from S_GPA where RNo = 'MDM16B017'' at line 1
+mysql> delete * from S_GPA where RNo = 'MDM17B016';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from S_GPA where RNo = 'MDM17B016'' at line 1
+mysql> update S_COLLEGE set EmailId = 'mdm17b016@gmail.com' where RNo = 'MDM17B017';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> delete * from S_GPA where RNo = 'MDM17B016' and SemNo = 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from S_GPA where RNo = 'MDM17B016' and SemNo = 3' at line 1
+mysql> select * from F_ADVISOR2;
++-------+-----------+-----------+----------+
+| FA_Id | FA_Degree | FA_Branch | FA_Batch |
++-------+-----------+-----------+----------+
+| COM01 | BTech     | COE       |     2016 |
+| EDM01 | BTech     | EDM       |     2016 |
++-------+-----------+-----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from F_ADVISOR1;
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| FA_Id | FA_Fname          | FA_Lname    | FA_EmailId               | FA_MobileNo | FA_Password |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+| CDS01 | Sadagopan         | Narasimhan  | sady@iiitdm.ac.in        | 9874563214  | s@DDY       |
+| COM01 | BALA SUBRAMANYYAM | SIVALSELVEN | sivaselvanb@iiitdm.ac.in | 7654321890  | sivaselvanb |
+| EDM01 | K                 | Selva Jyoti | kselvajyoti@gmail.com    | 8671549672  | ksj@789     |
+| MDM01 | Srinivan          | Pandian     | srpandian@gmail.com      | 8125463254  | srpan##     |
++-------+-------------------+-------------+--------------------------+-------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| CDS17M001 | cds17m001@iiitdm.ac.in | MDES   | CDS    |     2 | CDS01 | Ashoka Boys Hostel   |           415 |
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
+| MDM17B016 | mdm16b016@iiitdm.ac.in | BTech  | MDM    |     2 | MDM01 | Aswatha Boys Hostel  |           512 |
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel   |           100 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> insert into F_ADVISOR2 values
+    -> ('CDS01','MDES','CDS',2017);
+Query OK, 1 row affected (0.44 sec)
+
+mysql> insert into F_ADVISOR2 values ('MDM01','BTech','MDM',2017);
+Query OK, 1 row affected (0.42 sec)
+
+mysql> select * from S_CGPA;
++-----------+------+
+| RNo       | Cgpa |
++-----------+------+
+| CDS17M001 | 8.82 |
+| COE16B041 | 9.02 |
+| COE16B042 | 8.98 |
+| COE16B043 | 8.85 |
+| EDM16B008 | 8.82 |
+| EDM16B035 | 8.85 |
+| EDM16B038 | 8.01 |
+| EVD16I010 | 8.89 |
+| EVD16I018 | 8.90 |
+| MDM17B016 | 9.60 |
+| MFD15I033 | 8.90 |
++-----------+------+
+11 rows in set (0.00 sec)
+
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| CDS17M001 |     1 | 8.82 |
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
+| EDM16B008 |     1 | 8.82 |
+| EDM16B008 |     2 | 8.85 |
+| EDM16B008 |     3 | 7.85 |
+| EDM16B035 |     1 | 8.34 |
+| EDM16B035 |     2 | 8.68 |
+| EDM16B035 |     3 | 8.48 |
+| EDM16B038 |     1 | 8.23 |
+| EDM16B038 |     2 | 7.90 |
+| EDM16B038 |     3 | 8.85 |
+| EVD16I010 |     1 | 8.49 |
+| EVD16I010 |     2 | 8.64 |
+| EVD16I010 |     3 | 8.85 |
+| EVD16I018 |     1 | 8.78 |
+| EVD16I018 |     2 | 7.90 |
+| EVD16I018 |     3 | 9.50 |
+| MDM17B016 |     1 | 9.20 |
+| MDM17B016 |     2 | 9.40 |
+| MDM17B016 |     3 | 9.80 |
+| MFD15I033 |     1 | 8.20 |
+| MFD15I033 |     2 | 8.47 |
+| MFD15I033 |     3 | 9.07 |
++-----------+-------+------+
+31 rows in set (0.00 sec)
+
+mysql> delete from S_GPA where RNo='MDM17B016';
+Query OK, 3 rows affected (0.08 sec)
+
+mysql> select * from S_CGPA;
++-----------+------+
+| RNo       | Cgpa |
++-----------+------+
+| CDS17M001 | 8.82 |
+| COE16B041 | 9.02 |
+| COE16B042 | 8.98 |
+| COE16B043 | 8.85 |
+| EDM16B008 | 8.82 |
+| EDM16B035 | 8.85 |
+| EDM16B038 | 8.01 |
+| EVD16I010 | 8.89 |
+| EVD16I018 | 8.90 |
+| MDM17B016 | 9.60 |
+| MFD15I033 | 8.90 |
++-----------+------+
+11 rows in set (0.00 sec)
+
+mysql> insert into S_GPA values
+    -> ('MDM17B016',1,9.60);
+Query OK, 1 row affected (0.42 sec)
+
+mysql> delete from S_GPA where RNo='CDS17B001';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into S_GPA values
+    -> ('CDS17B001',1,8.82);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_GPA`, CONSTRAINT `S_GPA_ibfk_1` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> insert into S_GPA values ('CDS17M001',1,8.82);
+ERROR 1062 (23000): Duplicate entry 'CDS17M001-1' for key 'PRIMARY'
+mysql> select * from S_GPA;
++-----------+-------+------+
+| RNo       | SemNo | GPA  |
++-----------+-------+------+
+| CDS17M001 |     1 | 8.82 |
+| COE16B041 |     1 | 8.83 |
+| COE16B041 |     2 | 9.23 |
+| COE16B041 |     3 | 9.09 |
+| COE16B042 |     1 | 8.78 |
+| COE16B042 |     2 | 9.03 |
+| COE16B042 |     3 | 8.92 |
+| COE16B043 |     1 | 8.61 |
+| COE16B043 |     2 | 8.82 |
+| COE16B043 |     3 | 8.85 |
+| EDM16B008 |     1 | 8.82 |
+| EDM16B008 |     2 | 8.85 |
+| EDM16B008 |     3 | 7.85 |
+| EDM16B035 |     1 | 8.34 |
+| EDM16B035 |     2 | 8.68 |
+| EDM16B035 |     3 | 8.48 |
+| EDM16B038 |     1 | 8.23 |
+| EDM16B038 |     2 | 7.90 |
+| EDM16B038 |     3 | 8.85 |
+| EVD16I010 |     1 | 8.49 |
+| EVD16I010 |     2 | 8.64 |
+| EVD16I010 |     3 | 8.85 |
+| EVD16I018 |     1 | 8.78 |
+| EVD16I018 |     2 | 7.90 |
+| EVD16I018 |     3 | 9.50 |
+| MDM17B016 |     1 | 9.60 |
+| MFD15I033 |     1 | 8.20 |
+| MFD15I033 |     2 | 8.47 |
+| MFD15I033 |     3 | 9.07 |
++-----------+-------+------+
+29 rows in set (0.00 sec)
+
+mysql> select * from S_GRADE;
++-----------+-----------+-------+-------+
+| RNo       | Course_No | SemNo | Grade |
++-----------+-----------+-------+-------+
+| CDS17M001 | DES323T   |     1 | A     |
+| CDS17M001 | MAT333T   |     1 | S     |
+| COE16B041 | COM105P   |     1 | S     |
+| COE16B041 | COM105T   |     1 | S     |
+| COE16B041 | COM206T   |     3 | S     |
+| COE16B041 | ELE103T   |     2 | S     |
+| COE16B041 | MAT204T   |     3 | B     |
+| COE16B041 | PHY107P   |     2 | A     |
+| COE16B042 | COM205T   |     3 | A     |
+| COE16B042 | DES104P   |     2 | B     |
+| COE16B042 | DES201T   |     3 | S     |
+| COE16B042 | ELE103T   |     2 | A     |
+| COE16B042 | MAT104T   |     1 | B     |
+| COE16B043 | COM105T   |     1 | A     |
+| COE16B043 | COM206P   |     3 | S     |
+| COE16B043 | COM209P   |     3 | A     |
+| COE16B043 | DES102T   |     2 | A     |
+| COE16B043 | ELE103T   |     2 | S     |
+| COE16B043 | INT110P   |     1 | A     |
+| COE16B043 | PHY108T   |     1 | S     |
+| EDM16B008 | ELE223P   |     2 | A     |
+| EDM16B008 | ELE223T   |     3 | S     |
+| EDM16B008 | INT108T   |     1 | A     |
+| EDM16B008 | INT109P   |     1 | S     |
+| EDM16B008 | INT111P   |     2 | A     |
+| EDM16B008 | MAN102T   |     2 | S     |
+| EDM16B035 | DES105P   |     2 | S     |
+| EDM16B035 | ELE217T   |     3 | S     |
+| EDM16B035 | ELE218T   |     3 | A     |
+| EDM16B035 | INT107T   |     1 | A     |
+| EDM16B035 | MAT105P   |     2 | A     |
+| EDM16B035 | PHY107T   |     1 | S     |
+| EDM16B038 | DES103T   |     1 | A     |
+| EDM16B038 | DES210T   |     3 | A     |
+| EDM16B038 | INT111P   |     2 | A     |
+| EDM16B038 | MAT104T   |     1 | B     |
+| EDM16B038 | MAT204T   |     3 | S     |
+| EDM16B038 | PHY107T   |     2 | B     |
+| EVD16I010 | COM105T   |     1 | A     |
+| EVD16I010 | DES102T   |     2 | S     |
+| EVD16I010 | DES103T   |     1 | S     |
+| EVD16I010 | MAN201T   |     3 | C     |
+| EVD16I010 | MAT105T   |     2 | C     |
+| EVD16I010 | MAT204T   |     3 | A     |
+| EVD16I018 | COM105T   |     1 | S     |
+| EVD16I018 | ELE223P   |     3 | S     |
+| EVD16I018 | INT108T   |     1 | B     |
+| EVD16I018 | MAT204T   |     3 | S     |
+| EVD16I018 | PHY107P   |     2 | S     |
+| EVD16I018 | PHY107T   |     2 | A     |
+| MDM17B016 | DES111P   |     2 | B     |
+| MDM17B016 | DES121P   |     3 | S     |
+| MDM17B016 | MEC102T   |     1 | S     |
+| MDM17B016 | MEC121    |     3 | S     |
+| MDM17B016 | MEC2233P  |     2 | S     |
+| MDM17B016 | PHY107T   |     1 | A     |
+| MFD15I033 | COM105T   |     2 | S     |
+| MFD15I033 | DES103T   |     1 | S     |
+| MFD15I033 | DES120P   |     3 | S     |
+| MFD15I033 | DES229P   |     3 | A     |
+| MFD15I033 | ELE103T   |     1 | S     |
+| MFD15I033 | MAN102T   |     2 | C     |
+| MFD15I033 | MEC103T   |     3 | B     |
++-----------+-----------+-------+-------+
+63 rows in set (0.00 sec)
+
+mysql> insert into S_GPA values('MFD15I033', 4, 8.54);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into S_GPA values('MFD15I033', 5, 8.84);
+Query OK, 1 row affected (0.71 sec)
+
+mysql> insert into S_GRADE values ('MFD16I033', 'ELT102T', 4, 'S');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`P_S_FA_Interaction`.`S_GRADE`, CONSTRAINT `S_GRADE_ibfk_1` FOREIGN KEY (`RNo`) REFERENCES `S_COLLEGE` (`RNo`))
+mysql> select * from S_COLLEGE;
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| RNo       | EmailId                | Degree | Branch | SemNo | FA_Id | Hostel_Name          | Hostel_RoomNo |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+| CDS17M001 | cds17m001@iiitdm.ac.in | MDES   | CDS    |     2 | CDS01 | Ashoka Boys Hostel   |           415 |
+| COE16B041 | coe16b041@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           910 |
+| COE16B042 | coe16b042@gmail.com    | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           906 |
+| COE16B043 | coe16b043@iiitdm.ac.in | BTech  | COE    |     4 | COM01 | Aswatha Girls Hostel |           905 |
+| EDM16B008 | edm16b008@iiitdm.ac.in | BTech  | EDM    |     4 | EDM01 | Ashoka Boys Hostel   |          1405 |
+| EDM16B035 | edm16b035@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Girls Hostel |           909 |
+| EDM16B038 | edm16b010@gmail.com    | BTech  | EDM    |     4 | EDM01 | Aswatha Boys Hostel  |          1308 |
+| EVD16I010 | evd16i010@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Aswatha Girls Hostel |          1005 |
+| EVD16I018 | evd16i018@iiitdm.ac.in | DD     | EVD    |     4 | EDM01 | Ashoka Boys Hostel   |           201 |
+| MDM17B016 | mdm16b016@iiitdm.ac.in | BTech  | MDM    |     2 | MDM01 | Aswatha Boys Hostel  |           512 |
+| MFD15I033 | mfd15i033@iiitdm.ac.in | DD     | MFD    |     6 | COM01 | Ashoka Boys Hostel   |           100 |
++-----------+------------------------+--------+--------+-------+-------+----------------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033', 'ELT102T', 4, 'S');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033', 'ELT102P', 4, 'A');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033', 'MAT444P', 5, 'A');
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into S_GRADE values ('MFD15I033', 'COM444P', 5, 'B');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from S_PERSONAL1;
++-------------+---------------+--------+
+| First_Name  | Last_Name     | Gender |
++-------------+---------------+--------+
+| Bharath     | Chandra       | M      |
+| Dondapati   | MohanVamsi    | M      |
+| Gatram      | Manoj         | M      |
+| Gondayala   | Phani         | M      |
+| Gorantla    | Meghana       | F      |
+| Gunturu     | Sowmya        | F      |
+| Maheswaran  | Vineetha      | F      |
+| Mamidi      | Snigdha       | F      |
+| Takkelapati | Harika        | F      |
+| Tatavarthy  | Prasanna      | F      |
+| Telluri     | Meghana Reddy | F      |
+| Yadavalli   | Avinash       | M      |
++-------------+---------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> 
